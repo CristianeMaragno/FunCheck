@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity(), NavigationHost {
                 .add(R.id.container, LoginFragment())
                 .commit()
         }
+
     }
 
     override fun navigateTo(fragment: Fragment, addToBackstack: Boolean) {
