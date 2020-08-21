@@ -68,9 +68,9 @@ class MonitoredDestinationsFragment : Fragment(), NavigationView.OnNavigationIte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_first_fragment -> Toast.makeText(context, "Test nav_first_fragment clicked", Toast.LENGTH_LONG).show()
-            R.id.nav_second_fragment -> Toast.makeText(context, "Test nav_second_fragment clicked", Toast.LENGTH_LONG).show()
-            R.id.nav_third_fragment -> Toast.makeText(context, "Test nav_third_fragment clicked", Toast.LENGTH_LONG).show()
+            R.id.nav_home_fragment -> Toast.makeText(context, "Test nav_first_fragment clicked", Toast.LENGTH_LONG).show()
+            R.id.nav_notifications_fragment -> Toast.makeText(context, "Test nav_second_fragment clicked", Toast.LENGTH_LONG).show()
+            R.id.nav_log_out_fragment -> Toast.makeText(context, "Test nav_third_fragment clicked", Toast.LENGTH_LONG).show()
         }
         return true
     }
