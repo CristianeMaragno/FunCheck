@@ -1,19 +1,20 @@
 package com.cristianerm.bestflight
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import kotlinx.android.synthetic.main.fragment_monitored_destinations.view.*
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_monitored_destinations.*
+import kotlinx.android.synthetic.main.fragment_monitored_destinations.view.*
+
 
 /**
  * A simple [Fragment] subclass.
  */
-class MonitoredDestinationsFragment : Fragment() {
+class MonitoredDestinationsFragment : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,8 +26,7 @@ class MonitoredDestinationsFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_monitored_destinations, container, false)
 
-        // Set up the toolbar.
-        (activity as AppCompatActivity).setSupportActionBar(view.app_bar_monitored_destinations)
+        (activity as AppCompatActivity).setSupportActionBar(app_bar_monitored_destinations)
 
         view.app_bar_monitored_destinations.setNavigationOnClickListener {
             Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
@@ -48,6 +48,21 @@ class MonitoredDestinationsFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         super.onCreateOptionsMenu(menu, menuInflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // The action bar home/up action should open or close the drawer.
+        when (item.itemId) {
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+                return true
+            }
+            android.R.id.home -> {
+                drawer_layout.openDrawer(GravityCompat.START)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }
