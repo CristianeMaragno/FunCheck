@@ -29,7 +29,8 @@ class MonitoredDestinationsFragment : Fragment(){
         (activity as AppCompatActivity).setSupportActionBar(app_bar_monitored_destinations)
 
         view.app_bar_monitored_destinations.setNavigationOnClickListener {
-            Toast.makeText(context, "Test", Toast.LENGTH_LONG).show();
+            Toast.makeText(context, "Test", Toast.LENGTH_LONG).show()
+            drawer_layout.openDrawer(GravityCompat.START)
         }
 
         view.app_bar_monitored_destinations.setOnMenuItemClickListener { menuItem ->
@@ -53,10 +54,6 @@ class MonitoredDestinationsFragment : Fragment(){
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
         when (item.itemId) {
-            android.R.id.home -> {
-                drawer_layout.openDrawer(GravityCompat.START)
-                return true
-            }
             android.R.id.home -> {
                 drawer_layout.openDrawer(GravityCompat.START)
                 return true
