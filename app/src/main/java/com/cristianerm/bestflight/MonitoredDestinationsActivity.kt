@@ -1,6 +1,7 @@
 package com.cristianerm.bestflight
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,7 @@ class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavi
             drawer_layout.openDrawer(GravityCompat.START)
         }
 
-        /*app_bar_monitored_destinations.setOnMenuItemClickListener { menuItem ->
+        app_bar_monitored_destinations.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_icon_more -> {
                     Toast.makeText(this, "Test item clicked", Toast.LENGTH_LONG).show();
@@ -28,7 +29,7 @@ class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavi
                 }
                 else -> false
             }
-        }*/
+        }
 
         val navigationView: NavigationView = nav_view
         navigationView.setNavigationItemSelectedListener(this)
@@ -43,10 +44,11 @@ class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavi
 
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, menuInflater)
-    }*/
+        return true
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // The action bar home/up action should open or close the drawer.
