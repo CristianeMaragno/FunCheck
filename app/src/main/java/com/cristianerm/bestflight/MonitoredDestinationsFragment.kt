@@ -1,12 +1,13 @@
 package com.cristianerm.bestflight
 
+import android.app.Activity
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.fragment_monitored_destinations.*
 import kotlinx.android.synthetic.main.fragment_monitored_destinations.view.*
@@ -68,7 +69,7 @@ class MonitoredDestinationsFragment : Fragment(), NavigationView.OnNavigationIte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_home_fragment -> Toast.makeText(context, "Test nav_first_fragment clicked", Toast.LENGTH_LONG).show()
+            R.id.nav_home_fragment -> Toast.makeText(context, "Test nav_second_fragment clicked", Toast.LENGTH_LONG).show()
             R.id.nav_notifications_fragment -> Toast.makeText(context, "Test nav_second_fragment clicked", Toast.LENGTH_LONG).show()
             R.id.nav_log_out_fragment -> Toast.makeText(context, "Test nav_third_fragment clicked", Toast.LENGTH_LONG).show()
         }
