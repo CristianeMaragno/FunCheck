@@ -6,13 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.fragment_monitored_destinations.*
+import kotlinx.android.synthetic.main.activity_monitored_destinations.*
 
 class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_monitored_destinations)
+        setContentView(R.layout.activity_monitored_destinations)
 
         setSupportActionBar(app_bar_monitored_destinations)
 
