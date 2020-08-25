@@ -5,5 +5,5 @@
         android:id="@+id/menu_icon_more"
         android:icon="@drawable/ic_more_vert"
         android:title="More Options bar"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
 </menu>

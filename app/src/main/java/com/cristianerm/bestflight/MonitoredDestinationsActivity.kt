@@ -3,8 +3,10 @@ package com.cristianerm.bestflight
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_monitored_destinations.*
@@ -24,7 +26,9 @@ class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavi
         app_bar_monitored_destinations.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_icon_more -> {
-                    Toast.makeText(this, "Test item clicked", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, "Test item clicked", Toast.LENGTH_LONG).show()
+                    val menuItemView: View = findViewById(R.id.menu_icon_more)
+                    showPopup(menuItemView)
                     true
                 }
                 else -> false
@@ -79,6 +83,27 @@ class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavi
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun showPopup(view: View) {
+        val popup = PopupMenu(this, view)
+        popup.inflate(R.menu.pop_up_menu)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.pop_up_menu_change_password -> {
+                    Toast.makeText(this, "pop_up_menu_change_password clicked", Toast.LENGTH_SHORT).show()
+                }
+                R.id.pop_up_menu_delete_account -> {
+                    Toast.makeText(this, "pop_up_menu_delete_account clicked", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            true
+        })
+
+        popup.show()
     }
 
 }
