@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_monitored_destinations.*
 
 class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
