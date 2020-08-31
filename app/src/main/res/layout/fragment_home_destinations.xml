@@ -11,7 +11,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Destinations"
-        android:textSize="36sp"
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="341dp" />
+        android:textSize="36sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
