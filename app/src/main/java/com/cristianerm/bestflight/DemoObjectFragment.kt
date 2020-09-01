@@ -23,16 +23,16 @@ class DemoObjectFragment : Fragment() {
         arguments?.takeIf { it.containsKey(ARG_OBJECT) }?.apply {
 
             var tab_page = getInt(ARG_OBJECT).toString()
-            val textView: TextView = view.findViewById(R.id.textView_home_destinations)
 
             if (tab_page == "1"){
-                textView.text = getInt(ARG_OBJECT).toString()
 
                 initRecyclerView()
                 addDataSet()
 
             }else{
-                textView.text = "Teste"
+
+                initRecyclerView()
+                addDataSet()
             }
 
 
