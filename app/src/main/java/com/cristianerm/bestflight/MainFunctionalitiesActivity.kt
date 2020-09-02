@@ -1,6 +1,5 @@
 package com.cristianerm.bestflight
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,14 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.activity_monitored_destinations.*
+import kotlinx.android.synthetic.main.activity_main_functionalities.*
 
-class MonitoredDestinationsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
+class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_monitored_destinations)
+        setContentView(R.layout.activity_main_functionalities)
 
         setSupportActionBar(app_bar_monitored_destinations)
 

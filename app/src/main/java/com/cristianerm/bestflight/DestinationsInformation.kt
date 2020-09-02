@@ -1,6 +1,6 @@
 package com.cristianerm.bestflight
 
-data class DestinationsHome(
+data class DestinationsInformation(
 
     var destination: String,
 

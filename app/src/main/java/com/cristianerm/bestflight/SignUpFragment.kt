@@ -20,7 +20,7 @@ class SignUpFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sign_up, container, false)
 
         view.sign_up_cadastrate_button.setOnClickListener({
-            val intent = Intent(activity, MonitoredDestinationsActivity::class.java)
+            val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
             startActivity(intent)
         })
 

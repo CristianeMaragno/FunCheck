@@ -4,17 +4,17 @@ class DestinationsDataSource{
 
     companion object{
 
-        fun createDataSet(): ArrayList<DestinationsHome>{
-            val list = ArrayList<DestinationsHome>()
+        fun createDataSet(): ArrayList<DestinationsInformation>{
+            val list = ArrayList<DestinationsInformation>()
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "FLO X RIO",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "CUR X SP",
                     "14/07/2020 -",
                     "20/07/2020"
@@ -22,28 +22,28 @@ class DestinationsDataSource{
             )
 
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "RG X RIO",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "PR X USA",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "BLU X AM",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
-                DestinationsHome(
+                DestinationsInformation(
                     "FLO X BA",
                     "14/07/2020 -",
                     "20/07/2020"

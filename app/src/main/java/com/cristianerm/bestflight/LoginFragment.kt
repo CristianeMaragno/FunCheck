@@ -2,7 +2,6 @@ package com.cristianerm.bestflight
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ class LoginFragment: Fragment() {
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
         view.log_in_button.setOnClickListener({
-            val intent = Intent(activity, MonitoredDestinationsActivity::class.java)
+            val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
             startActivity(intent)
         })
 
