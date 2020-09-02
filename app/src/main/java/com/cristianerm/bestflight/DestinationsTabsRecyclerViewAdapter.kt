@@ -1,14 +1,14 @@
 package com.cristianerm.bestflight
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.destinations_item.view.*
 
 class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private val TAG: String = "AppDebug"
 
     private var items: List<DestinationsInformation> = ArrayList()
 
@@ -54,6 +54,13 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             date_go.setText(destinationsHome.date_go)
             date_back.setText(destinationsHome.date_back)
 
+            button_favorite.setOnClickListener(View.OnClickListener {
+                Log.d("DestinationsAdapter", "button_favorite clicked at position " + adapterPosition)
+            })
+
+            button_notifications.setOnClickListener(View.OnClickListener {
+                Log.d("DestinationsAdapter", "button_notifications clicked at position " + adapterPosition)
+            })
 
         }
 
