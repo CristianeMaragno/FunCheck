@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.viewpager.widget.ViewPager
+<androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/pager_home"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout_home"
+    <androidx.viewpager.widget.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent">
 
-</androidx.viewpager.widget.ViewPager>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </androidx.viewpager.widget.ViewPager>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floating_action_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="16dp"
+        android:contentDescription="Add destination"
+        app:srcCompat="@drawable/ic_add"
+        app:tint="@color/white"
+        app:backgroundTint="@color/colorSecondary"/>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

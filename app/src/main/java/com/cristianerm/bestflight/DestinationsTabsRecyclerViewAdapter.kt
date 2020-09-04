@@ -1,10 +1,9 @@
 package com.cristianerm.bestflight
 
-import android.util.Log
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.destinations_item.view.*
 
@@ -55,15 +54,20 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             date_back.setText(destinationsHome.date_back)
 
             button_favorite.setOnClickListener(View.OnClickListener {
-                Log.d("DestinationsAdapter", "button_favorite clicked at position " + adapterPosition)
+                button_favorite.setImageResource(R.drawable.ic_favorite)
+
+                /*if(button_favorite.getResources()==R.drawable.ic_favorite_none){
+                    button_favorite.setImageResource(R.drawable.ic_favorite)
+                }else{
+                    button_favorite.setImageResource(R.drawable.ic_favorite_none)
+                }*/
             })
 
             button_notifications.setOnClickListener(View.OnClickListener {
-                Log.d("DestinationsAdapter", "button_notifications clicked at position " + adapterPosition)
+                button_notifications.setImageResource(R.drawable.ic_notifications_colored)
             })
 
         }
 
     }
-
 }
