@@ -1,9 +1,11 @@
 package com.cristianerm.bestflight
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.fragment_monitored_destinations.*
@@ -29,8 +31,6 @@ class HomeFragment : Fragment() {
         tab_layout_home.setupWithViewPager(viewPager)
 
         //You tab icons
-
-        //You tab icons
         val icons = intArrayOf(
             R.drawable.ic_airplane,
             R.drawable.ic_favorite
@@ -39,6 +39,12 @@ class HomeFragment : Fragment() {
         for (i in 0 until 2) {
             tab_layout_home.getTabAt(i)?.setIcon(icons[i])
         }
+
+        floating_action_button_add_destination.setOnClickListener {
+            Toast.makeText(context, "floating_action_button_add_destination clicked", Toast.LENGTH_SHORT).show()
+            Log.d("MonitoredDestinations","floating_action_button_add_destination clicked")
+        }
+
     }
 
 }
