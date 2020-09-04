@@ -1,11 +1,10 @@
 package com.cristianerm.bestflight
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.fragment_monitored_destinations.*
@@ -41,8 +40,8 @@ class HomeFragment : Fragment() {
         }
 
         floating_action_button_add_destination.setOnClickListener {
-            Toast.makeText(context, "floating_action_button_add_destination clicked", Toast.LENGTH_SHORT).show()
-            Log.d("MonitoredDestinations","floating_action_button_add_destination clicked")
+            val intent = Intent(activity, AddDestinationActivity::class.java)
+            startActivity(intent)
         }
 
     }

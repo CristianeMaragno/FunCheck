@@ -11,7 +11,7 @@
         android:theme="@style/ThemeBestFlight">
         <activity android:name=".MainFunctionalitiesActivity"></activity>
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".MonitoredDestinationsFragment" />
+        <activity android:name=".AddDestinationActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
