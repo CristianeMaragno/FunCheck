@@ -21,6 +21,18 @@ class AddDestinationFragment: Fragment() {
             val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
             startActivity(intent)
         })
+
+        view.pick_date_add_destination_button.setOnClickListener({
+            openDatePicker()
+        })
         return view
+    }
+
+    private fun openDatePicker(){
+        if(radio_button_just_go_add_destination.isChecked()){
+            Toast.makeText(context, "radio button checked", Toast.LENGTH_SHORT).show()
+        }else{
+            Toast.makeText(context, "radio button not checked", Toast.LENGTH_SHORT).show()
+        }
     }
 }
