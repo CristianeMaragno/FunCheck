@@ -15,10 +15,12 @@
         android:padding="24dp"
         android:paddingTop="16dp">
 
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            app:srcCompat="@drawable/ic_close" />
+        <ImageButton
+            android:id="@+id/close_add_destination"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/ic_close"
+            android:backgroundTint="@color/white"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/origin_text_input_add_destination"
@@ -55,6 +57,14 @@
             android:text="One way"
             android:layout_weight="1"/>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/pick_date_add_destination_button"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:text="PICK DATE" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -63,35 +73,36 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/go_date_text_input_add_destination"
-                android:layout_width="0dp"
-                android:layout_weight=".50"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:hint="Departure date"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                android:layout_weight=".50"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/go_date_edit_text_add_destination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    />
+                    android:inputType="date"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/back_date_text_input_add_destination"
-                android:layout_width="0dp"
-                android:layout_weight=".50"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:hint="Date back"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+                android:hint="Back date"
+                android:layout_weight=".50"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/back_date_edit_text_add_destination"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none"
-                    />
+                    android:inputType="date"/>
             </com.google.android.material.textfield.TextInputLayout>
+
         </LinearLayout>
 
         <LinearLayout
