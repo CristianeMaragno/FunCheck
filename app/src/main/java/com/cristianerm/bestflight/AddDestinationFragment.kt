@@ -1,15 +1,19 @@
 package com.cristianerm.bestflight
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_add_destinations.*
 import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
-import kotlinx.android.synthetic.main.fragment_sign_up.view.*
+import java.util.*
+
 
 class AddDestinationFragment: Fragment() {
     override fun onCreateView(
@@ -30,9 +34,30 @@ class AddDestinationFragment: Fragment() {
 
     private fun openDatePicker(){
         if(radio_button_just_go_add_destination.isChecked()){
-            Toast.makeText(context, "radio button checked", Toast.LENGTH_SHORT).show()
+            openDatePickerOneDate()
         }else{
             Toast.makeText(context, "radio button not checked", Toast.LENGTH_SHORT).show()
+            openDatePickerTwoDate()
+        }
+    }
+
+    private fun openDatePickerOneDate(){
+        val builder = MaterialDatePicker.Builder.datePicker()
+        val picker = builder.build()
+        picker.show(childFragmentManager, picker.toString())
+
+        picker.addOnPositiveButtonClickListener {
+            Toast.makeText(context, "Date String = ${picker.headerText}:: Date epoch value = ${it}", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun openDatePickerTwoDate(){
+        val builder = MaterialDatePicker.Builder.dateRangePicker()
+        val picker = builder.build()
+        picker.show(childFragmentManager, picker.toString())
+
+        picker.addOnPositiveButtonClickListener {
+            Toast.makeText(context, "Date String = ${picker.headerText}::  Date epoch values::${it.first}:: to :: ${it.second}", Toast.LENGTH_SHORT).show()
         }
     }
 }
