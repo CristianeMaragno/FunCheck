@@ -50,12 +50,12 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <RadioButton
-            android:id="@+id/radio_button_just_go_add_destination"
+        <CheckBox
+            android:id="@+id/check_box_just_go_add_destination"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="One way"
-            android:layout_weight="1"/>
+            android:checked="false"
+            android:text="One way"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/pick_date_add_destination_button"

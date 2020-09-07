@@ -29,14 +29,22 @@ class AddDestinationFragment: Fragment() {
         view.pick_date_add_destination_button.setOnClickListener({
             openDatePicker()
         })
+
+        view.check_box_just_go_add_destination.setOnClickListener({
+            if(check_box_just_go_add_destination.isChecked()){
+                back_date_edit_text_add_destination.isEnabled =false
+            }else{
+                back_date_edit_text_add_destination.isEnabled =true
+            }
+        })
+
         return view
     }
 
     private fun openDatePicker(){
-        if(radio_button_just_go_add_destination.isChecked()){
+        if(check_box_just_go_add_destination.isChecked()){
             openDatePickerOneDate()
         }else{
-            Toast.makeText(context, "radio button not checked", Toast.LENGTH_SHORT).show()
             openDatePickerTwoDate()
         }
     }
