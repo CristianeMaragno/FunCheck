@@ -51,6 +51,14 @@ class AddDestinationFragment: Fragment() {
             }
         })
 
+        view.check_box_notifications_add_destination.setOnClickListener({
+            if(check_box_notifications_add_destination.isChecked()){
+                price_text_input_add_destination.visibility = View.VISIBLE
+            }else{
+                price_text_input_add_destination.visibility = View.GONE
+            }
+        })
+
         view.go_date_edit_text_add_destination.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable) {}
