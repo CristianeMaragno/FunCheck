@@ -7,6 +7,8 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_add_destinations.*
@@ -16,6 +18,16 @@ import java.util.*
 
 
 class AddDestinationFragment: Fragment() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        ///Put elements on the dropdown menu of airlines
+        val items = listOf("All", "Gol", "Latam", "Azul")
+        val adapter = ArrayAdapter(requireContext(), R.layout.list_item_general, items)
+        (airlines_text_input_add_destination.editText as? AutoCompleteTextView)?.setAdapter(adapter)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment

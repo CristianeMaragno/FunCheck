@@ -119,12 +119,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:hint="Filter airlines"
+                android:focusable="false"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                 <AutoCompleteTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
+                    android:focusable="false"
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
