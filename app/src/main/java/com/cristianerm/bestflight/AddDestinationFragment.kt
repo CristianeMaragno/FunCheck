@@ -1,9 +1,7 @@
 package com.cristianerm.bestflight
 
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_add_destinations.*
 import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -55,7 +54,10 @@ class AddDestinationFragment: Fragment() {
         picker.show(childFragmentManager, picker.toString())
 
         picker.addOnPositiveButtonClickListener {
-            Toast.makeText(context, "Date String = ${picker.headerText}:: Date epoch value = ${it}", Toast.LENGTH_SHORT).show()
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            var date_epoch = it
+            var date = sdf.format(Date(date_epoch)).toString()
+            go_date_edit_text_add_destination.setText(date)
         }
     }
 
@@ -65,7 +67,14 @@ class AddDestinationFragment: Fragment() {
         picker.show(childFragmentManager, picker.toString())
 
         picker.addOnPositiveButtonClickListener {
-            Toast.makeText(context, "Date String = ${picker.headerText}::  Date epoch values::${it.first}:: to :: ${it.second}", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Date String = ${picker.headerText}::  Date epoch values::${it.first}:: to :: ${it.second}", Toast.LENGTH_SHORT).show()
+            val sdf = SimpleDateFormat("dd/MM/yyyy")
+            var date_epoch_departure = it.first
+            var date_epoch_back = it.second
+            var date_departure = sdf.format(date_epoch_departure?.let { it1 -> Date(it1) }).toString()
+            var date_back = sdf.format(date_epoch_back?.let { it1 -> Date(it1) }).toString()
+            go_date_edit_text_add_destination.setText(date_departure)
+            back_date_edit_text_add_destination.setText(date_back)
         }
     }
 }
