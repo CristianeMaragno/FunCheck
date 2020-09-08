@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import kotlinx.android.synthetic.main.fragment_add_destinations.*
 import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
+import kotlinx.android.synthetic.main.fragment_sign_up.*
 import java.text.SimpleDateFormat
 import java.util.*
 
