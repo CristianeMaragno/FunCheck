@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.resources.MaterialAttributes.resolveOrThrow
 import kotlinx.android.synthetic.main.fragment_add_destinations.*
 import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -117,6 +118,7 @@ class AddDestinationFragment: Fragment() {
 
     private fun openDatePickerTwoDate(){
         val builder = MaterialDatePicker.Builder.dateRangePicker()
+        //builder.setTheme(R.attr.materialCalendarFullscreenTheme)
         val picker = builder.build()
         picker.show(childFragmentManager, picker.toString())
 
