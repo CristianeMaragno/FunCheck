@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.activity_main_functionalities.*
 
@@ -93,10 +94,23 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
 
             when (item!!.itemId) {
                 R.id.pop_up_menu_change_password -> {
-                    Toast.makeText(this, "pop_up_menu_change_password clicked", Toast.LENGTH_SHORT).show()
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.main_content_frame,
+                        ChangePasswordFragment()
+                    ).commit()
                 }
+
                 R.id.pop_up_menu_delete_account -> {
-                    Toast.makeText(this, "pop_up_menu_delete_account clicked", Toast.LENGTH_SHORT).show()
+                    MaterialAlertDialogBuilder(this)
+                        .setTitle(resources.getString(R.string.confirmation))
+                        .setMessage(resources.getString(R.string.supporting_text_delete_account))
+                        .setNegativeButton(resources.getString(R.string.cancel)) { dialog, which ->
+                            // Respond to negative button press
+                        }
+                        .setPositiveButton(resources.getString(R.string.yes)) { dialog, which ->
+                            // Respond to positive button press
+                        }
+                        .show()
                 }
             }
 
