@@ -9,6 +9,12 @@
             android:id="@+id/nav_notifications_fragment"
             android:icon="@drawable/ic_notifications"
             android:title="Notifications" />
+
+        <item
+            android:id="@+id/nav_change_password_fragment"
+            android:icon="@drawable/ic_change_password"
+            android:title="Change password" />
+
         <item
             android:id="@+id/nav_log_out_fragment"
             android:icon="@drawable/ic_log_out"

@@ -79,6 +79,11 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
                 NotificationsFragment()
             ).commit()
 
+            R.id.nav_change_password_fragment -> supportFragmentManager.beginTransaction().replace(
+                R.id.main_content_frame,
+                ChangePasswordFragment()
+            ).commit()
+
             R.id.nav_log_out_fragment -> Toast.makeText(this, "Test nav_third_fragment clicked", Toast.LENGTH_LONG).show()
         }
 
