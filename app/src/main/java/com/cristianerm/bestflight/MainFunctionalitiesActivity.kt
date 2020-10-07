@@ -98,13 +98,6 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
 
             when (item!!.itemId) {
-                R.id.pop_up_menu_change_password -> {
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.main_content_frame,
-                        ChangePasswordFragment()
-                    ).commit()
-                }
-
                 R.id.pop_up_menu_delete_account -> {
                     MaterialAlertDialogBuilder(this)
                         .setTitle(resources.getString(R.string.confirmation))
