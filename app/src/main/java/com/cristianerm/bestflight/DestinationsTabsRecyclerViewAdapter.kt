@@ -55,12 +55,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
 
             button_favorite.setOnClickListener(View.OnClickListener {
                 button_favorite.setImageResource(R.drawable.ic_favorite)
-
-                /*if(button_favorite.getResources()==R.drawable.ic_favorite_none){
-                    button_favorite.setImageResource(R.drawable.ic_favorite)
-                }else{
-                    button_favorite.setImageResource(R.drawable.ic_favorite_none)
-                }*/
             })
 
             button_notifications.setOnClickListener(View.OnClickListener {
