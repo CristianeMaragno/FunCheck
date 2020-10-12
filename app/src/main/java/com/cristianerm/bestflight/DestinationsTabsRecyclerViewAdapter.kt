@@ -1,6 +1,7 @@
 package com.cristianerm.bestflight
 
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,12 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             button_notifications.setOnClickListener(View.OnClickListener {
                 button_notifications.setImageResource(R.drawable.ic_notifications_colored)
             })
+
+            itemView.setOnClickListener { view ->
+                //val item_text = destination.text
+                //val position = itemView.verticalScrollbarPosition //Doesn't work, just 0
+                Log.v("AdapterRecyclerView", "item clicked")
+            }
 
         }
 
