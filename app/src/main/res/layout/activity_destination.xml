@@ -1,7 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container_destination"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DestinationActivity"/>
+    tools:context=".DestinationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:paddingTop="16dp">
+
+        <ImageButton
+            android:id="@+id/close_destination"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            app:srcCompat="@drawable/ic_close"
+            android:backgroundTint="@color/white"/>
+
+    </LinearLayout>
+
+</ScrollView>

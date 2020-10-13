@@ -64,13 +64,16 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             })
 
             itemView.setOnClickListener { view ->
-                //val item_text = destination.text
+                val item_text = destination.text
+                val date_go_text = date_go.text
+                val date_back_text = date_back.text
                 //val position = itemView.verticalScrollbarPosition //Doesn't work, just 0
                 Log.v("AdapterRecyclerView", "item clicked")
-                /*val intent = Intent(activity, AddDestinationActivity::class.java)
-                startActivity(intent)*/
 
                 val intent = Intent(view.getContext(), DestinationActivity::class.java)
+                intent.putExtra("destination", item_text)
+                intent.putExtra("date go", date_go_text)
+                intent.putExtra("date back", date_back_text)
                 view.getContext().startActivity(intent)
 
             }

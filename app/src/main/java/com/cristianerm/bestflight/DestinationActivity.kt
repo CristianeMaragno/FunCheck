@@ -2,31 +2,19 @@ package com.cristianerm.bestflight
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 
-class DestinationActivity : AppCompatActivity(), NavigationHost {
+class DestinationActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_destination)
 
-        if (savedInstanceState == null) {
-            supportFragmentManager
-                .beginTransaction()
-                .add(R.id.container_destination, DestinationFragment())
-                .commit()
-        }
-    }
+        val destination = intent.getStringExtra("destination")
+        val date_go = intent.getStringExtra("date go")
+        val date_back = intent.getStringExtra("date back")
+        Toast.makeText(this, "Value of destination: " + destination, Toast.LENGTH_LONG).show()
 
-    override fun navigateTo(fragment: Fragment, addToBackstack: Boolean) {
-        val transaction = supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container_destination, fragment)
-
-        if (addToBackstack) {
-            transaction.addToBackStack(null)
-        }
-
-        transaction.commit()
     }
 }
