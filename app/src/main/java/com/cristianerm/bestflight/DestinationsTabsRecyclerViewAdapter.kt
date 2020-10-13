@@ -1,10 +1,11 @@
 package com.cristianerm.bestflight
 
-import android.graphics.drawable.Drawable
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.destinations_item.view.*
 
@@ -66,6 +67,12 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 //val item_text = destination.text
                 //val position = itemView.verticalScrollbarPosition //Doesn't work, just 0
                 Log.v("AdapterRecyclerView", "item clicked")
+                /*val intent = Intent(activity, AddDestinationActivity::class.java)
+                startActivity(intent)*/
+
+                val intent = Intent(view.getContext(), DestinationActivity::class.java)
+                view.getContext().startActivity(intent)
+
             }
 
         }

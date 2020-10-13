@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeBestFlight">
-        <activity android:name=".MainFunctionalitiesActivity"></activity>
+        <activity android:name=".DestinationActivity"></activity>
+        <activity android:name=".MainFunctionalitiesActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".AddDestinationActivity" />
         <activity android:name=".LoginActivity">
