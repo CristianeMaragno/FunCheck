@@ -34,6 +34,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/text_destination_destination"
                 android:text="Destination"
+                android:paddingLeft="10dp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 />
 
@@ -43,6 +44,7 @@
                 android:layout_marginTop="8dp"
                 android:id="@+id/text_date_go_destination"
                 android:text="Date 1"
+                android:paddingLeft="10dp"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
@@ -53,6 +55,7 @@
                 android:layout_marginTop="8dp"
                 android:id="@+id/text_date_back_destination"
                 android:text="Date 2"
+                android:paddingLeft="10dp"
                 android:textAppearance="?attr/textAppearanceBody2"
                 android:textColor="?android:attr/textColorSecondary"
                 />
@@ -61,6 +64,7 @@
                 android:id="@+id/recyclerView_destination_results"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
                 android:padding="4dp"
                 android:scrollbars="vertical" />
 
