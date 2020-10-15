@@ -18,6 +18,9 @@ class DestinationActivity : AppCompatActivity() {
         val date_go = intent.getStringExtra("date go")
         val date_back = intent.getStringExtra("date back")
 
+        text_destination_destination.setText(destination)
+        text_date_go_destination.setText(date_go)
+        text_date_back_destination.setText(date_back)
 
         recyclerView_destination_results.apply {
             layoutManager = LinearLayoutManager(context)
