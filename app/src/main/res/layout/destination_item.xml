@@ -21,10 +21,10 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <ImageView
+            <!--<ImageView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:src="@drawable/gol_icon" />
+                android:src="@drawable/gol_icon" /> -->
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/price_destination"
+                    android:id="@+id/price_destination_result"
                     android:text="R$ 200,00"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:layout_gravity="right"
