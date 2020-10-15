@@ -1,10 +1,12 @@
 package com.cristianerm.bestflight
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_destination.*
+import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
 
 class DestinationActivity : AppCompatActivity() {
 
@@ -21,6 +23,11 @@ class DestinationActivity : AppCompatActivity() {
         text_destination_destination.setText(destination)
         text_date_go_destination.setText(date_go)
         text_date_back_destination.setText(date_back)
+
+        close_destination_result.setOnClickListener({
+            val intent = Intent(this, MainFunctionalitiesActivity::class.java)
+            startActivity(intent)
+        })
 
         recyclerView_destination_results.apply {
             layoutManager = LinearLayoutManager(context)
