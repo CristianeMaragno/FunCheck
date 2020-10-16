@@ -45,6 +45,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
         val destination = itemView.text_destination_home
         val date_go = itemView.text_date_go_home
         val date_back = itemView.text_date_back_home
+        val airline = itemView.text_airline_home
 
         val button_favorite = itemView.favorite_button_home
         val button_notifications = itemView.notifications_button_home
@@ -54,6 +55,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             destination.setText(destinationsHome.destination)
             date_go.setText(destinationsHome.date_go)
             date_back.setText(destinationsHome.date_back)
+            airline.setText(destinationsHome.airline)
 
             button_favorite.setOnClickListener(View.OnClickListener {
                 button_favorite.setImageResource(R.drawable.ic_favorite)
