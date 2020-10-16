@@ -69,6 +69,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 val item_text = destination.text
                 val date_go_text = date_go.text
                 val date_back_text = date_back.text
+                val airline_text = airline.text
                 //val position = itemView.verticalScrollbarPosition //Doesn't work, just 0
                 Log.v("AdapterRecyclerView", "item clicked")
 
@@ -76,6 +77,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 intent.putExtra("destination", item_text)
                 intent.putExtra("date go", date_go_text)
                 intent.putExtra("date back", date_back_text)
+                intent.putExtra("airline", airline_text)
                 view.getContext().startActivity(intent)
 
             }

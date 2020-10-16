@@ -20,6 +20,8 @@ class DestinationActivity : AppCompatActivity() {
         val date_go = intent.getStringExtra("date go")
         val date_back = intent.getStringExtra("date back")
 
+        val airline = intent.getStringExtra("airline")
+
         text_destination_destination.setText(destination)
         text_date_go_destination.setText(date_go)
         text_date_back_destination.setText(date_back)
