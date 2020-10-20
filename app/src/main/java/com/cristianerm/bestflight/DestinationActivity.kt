@@ -3,10 +3,13 @@ package com.cristianerm.bestflight
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_destination.*
 import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
+import org.jsoup.Jsoup
+import kotlin.concurrent.thread
 
 class DestinationActivity : AppCompatActivity() {
 
@@ -62,5 +65,37 @@ class DestinationActivity : AppCompatActivity() {
 
         destinationResultsRecyclerViewAdapter.submitList(list)
 
+
+        retrieveWebInfo()
+    }
+
+    private fun retrieveWebInfo(){
+        thread{
+            // network call, so run it in the background
+            val doc =
+                Jsoup.connect("https://www.wildaboutmovies.com/2019_movies/")
+                    .get()
+
+            val movieGrid = doc.getElementsByClass("post-grid")
+            val movieItems = movieGrid[0].getElementsByTag("a")
+
+            //val movieList = ArrayList<MovieListItem>()
+
+            for(movieItem in movieItems){
+                val movieName = movieItem.text()
+                Log.v("DestinatioActivity", "TEXT: " + movieName)
+                //val movieImageUrl = movieItem.getElementsByTag("img")[0].absUrl("data-original").toString()
+                //movieList.add(MovieListItem(movieName, movieImageUrl))
+            }
+
+            // can't access UI elements from the background thread
+            /*this.runOnUiThread{
+                val recyclerViewAdapter = RecyclerViewAdapter(movieList)
+                val linearLayoutManager = LinearLayoutManager(this)
+
+                recyclerView.layoutManager = linearLayoutManager
+                recyclerView.adapter = recyclerViewAdapter
+            }*/
+        }
     }
 }
