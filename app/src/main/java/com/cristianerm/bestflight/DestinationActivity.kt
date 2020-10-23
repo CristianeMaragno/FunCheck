@@ -73,29 +73,17 @@ class DestinationActivity : AppCompatActivity() {
         thread{
             // network call, so run it in the background
             val doc =
-                Jsoup.connect("https://www.wildaboutmovies.com/2019_movies/")
+                Jsoup.connect("https://jsoup.org/")
                     .get()
 
-            val movieGrid = doc.getElementsByClass("post-grid")
-            val movieItems = movieGrid[0].getElementsByTag("a")
+            val movieGrid = doc.getElementsByClass("content")
+            val movieItems = movieGrid[0].getElementsByTag("p")
 
-            //val movieList = ArrayList<MovieListItem>()
 
             for(movieItem in movieItems){
                 val movieName = movieItem.text()
                 Log.v("DestinatioActivity", "TEXT: " + movieName)
-                //val movieImageUrl = movieItem.getElementsByTag("img")[0].absUrl("data-original").toString()
-                //movieList.add(MovieListItem(movieName, movieImageUrl))
             }
-
-            // can't access UI elements from the background thread
-            /*this.runOnUiThread{
-                val recyclerViewAdapter = RecyclerViewAdapter(movieList)
-                val linearLayoutManager = LinearLayoutManager(this)
-
-                recyclerView.layoutManager = linearLayoutManager
-                recyclerView.adapter = recyclerViewAdapter
-            }*/
         }
     }
 }
