@@ -42,17 +42,11 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
 
-        val hour_go = itemView.hour_departure_and_arrival_go
-        val hour_back = itemView.hour_departure_and_arrival_back
-        val price = itemView.price_destination_result
-        val image = itemView.airline_logo
+        val attraction_name = itemView.text_view_attraction_name
 
         fun bind(destinationResult: DestinationResultInformation){
 
-            hour_go.setText(destinationResult.hour_departure_and_arrival_go)
-            hour_back.setText(destinationResult.hour_departure_and_arrival_back)
-            price.setText(destinationResult.price)
-            image.setBackgroundResource(R.drawable.latam_icon)
+            attraction_name.setText(destinationResult.attraction_name)
 
         }
 
