@@ -66,23 +66,20 @@ class DestinationActivity : AppCompatActivity() {
         destinationResultsRecyclerViewAdapter.submitList(list)
 
 
-        retrieveWebInfo()
+        RetrieveWebInfo()
     }
 
-    private fun retrieveWebInfo(){
+    private fun RetrieveWebInfo(){
         thread{
-            // network call, so run it in the background
-            val doc =
-                Jsoup.connect("https://jsoup.org/")
-                    .get()
+            val url = "https://www.tripadvisor.com.br/Attractions-g303631-Activities-Sao_Paulo_State_of_Sao_Paulo.html"
+            val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
 
-            val movieGrid = doc.getElementsByClass("content")
-            val movieItems = movieGrid[0].getElementsByTag("p")
+            val attractionGrid = doc.getElementsByClass("_1h6gevVw")
+            val attractions = attractionGrid[0].getElementsByTag("h3")
 
-
-            for(movieItem in movieItems){
-                val movieName = movieItem.text()
-                Log.v("DestinatioActivity", "TEXT: " + movieName)
+            for(attraction in attractions){
+                val attraction_name = attraction.text()
+                Log.v("DestinatioActivity", "TEXT: " + attraction_name)
             }
         }
     }
