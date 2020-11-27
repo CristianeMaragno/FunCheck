@@ -21,27 +21,29 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <!--<ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:id="@+id/airline_logo"/> -->
+            <ImageView
+                android:id="@+id/image_view_destination_item"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/latam_icon"
+                android:layout_marginRight="10dp"/>
 
-            <LinearLayout
+            <CheckBox
+                android:id="@+id/check_box_destination_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="15dp">
+                android:checked="false"
+                android:layout_gravity="center"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/text_view_attraction_name"
-                    android:text="Attraction"
-                    android:textSize="20sp"
-                    android:textColor="?android:attr/textColorSecondary"
-                    />
+            <TextView
+                android:id="@+id/text_view_destination_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attraction"
+                android:textSize="18sp"
+                android:textColor="?android:attr/textColorSecondary"
+                android:layout_gravity="center"/>
 
-            </LinearLayout>
 
         </LinearLayout>
 
