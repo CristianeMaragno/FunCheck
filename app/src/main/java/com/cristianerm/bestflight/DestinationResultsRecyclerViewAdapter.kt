@@ -1,13 +1,10 @@
 package com.cristianerm.bestflight
 
-import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.destination_item.view.*
-import kotlinx.android.synthetic.main.destinations_item.view.*
 
 class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

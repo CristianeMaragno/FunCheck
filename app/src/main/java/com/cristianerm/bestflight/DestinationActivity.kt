@@ -1,19 +1,21 @@
 package com.cristianerm.bestflight
 
 import android.content.Intent
+import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_destination.*
 import org.jsoup.Jsoup
-import kotlin.concurrent.thread
+import java.io.IOException
+
 
 class DestinationActivity : AppCompatActivity() {
 
     private lateinit var destinationResultsRecyclerViewAdapter: DestinationResultsRecyclerViewAdapter
     private val list = ArrayList<DestinationResultInformation>()
+    private var loader: AsyncTask<Void, Void, ArrayList<DestinationResultInformation>>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,44 +42,45 @@ class DestinationActivity : AppCompatActivity() {
             adapter = destinationResultsRecyclerViewAdapter
         }
 
-        //RetrieveWebInfo()
-        list.add(
-            DestinationResultInformation(
-                "Attraction name 1"
-            )
-        )
-        list.add(
-            DestinationResultInformation(
-                "Attraction name 2"
-            )
-        )
-        list.add(
-            DestinationResultInformation(
-                "Attraction name 3"
-            )
-        )
-
         destinationResultsRecyclerViewAdapter.submitList(list)
+
+        loader = LoadAttractions(this)
+        loader!!.execute()
     }
 
-    private fun RetrieveWebInfo(){
-        thread{
-            val url = "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html"
-            val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
+    inner class LoadAttractions(var activity: AppCompatActivity?): AsyncTask<Void, Void, ArrayList<DestinationResultInformation>>(){
 
-            val attractionGrid = doc.getElementsByClass("_1h6gevVw")
-            val attractions = attractionGrid[0].getElementsByTag("h3")
+        override fun doInBackground(vararg params: Void?): ArrayList<DestinationResultInformation> {
+            try {
+                //list.clear()
+                val url = "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html"
+                val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
 
-            for(attraction in attractions){
-                val attraction_name = attraction.text()
-                Log.v("DestinatioActivity", "TEXT: " + attraction_name)
-                list.add(
-                    DestinationResultInformation(
-                        attraction_name
+                val attractionGrid = doc.getElementsByClass("_1h6gevVw")
+                val attractions = attractionGrid[0].getElementsByTag("h3")
+
+                for(attraction in attractions){
+                    val attraction_name = attraction.text()
+                    Log.v("DestinatioActivity", "TEXT: " + attraction_name)
+                    list.add(
+                        DestinationResultInformation(
+                            attraction_name
+                        )
                     )
-                )
+                }
+
+
+            }catch (e: IOException){
+                e.printStackTrace()
             }
+            return list
         }
+
+        override fun onPostExecute(result: ArrayList<DestinationResultInformation>?) {
+            destinationResultsRecyclerViewAdapter.notifyDataSetChanged()
+        }
+
     }
 
 }
+
