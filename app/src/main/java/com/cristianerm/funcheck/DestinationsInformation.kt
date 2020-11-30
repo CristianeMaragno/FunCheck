@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 data class DestinationsInformation(
 

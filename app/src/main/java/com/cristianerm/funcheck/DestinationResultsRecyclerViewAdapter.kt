@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 import android.view.LayoutInflater
 import android.view.View
@@ -39,7 +39,6 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
 
-        val attraction_image = itemView.image_view_destination_item
         val attraction_check_box = itemView.check_box_destination_item
         val attraction_name = itemView.text_view_destination_item
 

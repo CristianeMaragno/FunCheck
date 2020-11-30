@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 import android.content.Intent
 import android.os.Bundle
@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
         //You tab icons
         val icons = intArrayOf(
-            R.drawable.ic_airplane,
+            R.drawable.ic_all,
             R.drawable.ic_favorite
         )
 

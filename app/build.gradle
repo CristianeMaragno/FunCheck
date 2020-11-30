@@ -7,7 +7,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.cristianerm.bestflight"
+        applicationId "com.cristianerm.funcheck"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1

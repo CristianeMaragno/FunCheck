@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 import android.os.Bundle
 import android.view.LayoutInflater

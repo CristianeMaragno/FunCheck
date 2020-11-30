@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 import org.junit.Test
 

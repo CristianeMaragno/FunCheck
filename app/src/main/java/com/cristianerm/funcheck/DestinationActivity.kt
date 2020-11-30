@@ -1,4 +1,4 @@
-package com.cristianerm.bestflight
+package com.cristianerm.funcheck
 
 import android.content.Intent
 import android.os.AsyncTask
@@ -61,14 +61,15 @@ class DestinationActivity : AppCompatActivity() {
 
                 for(attraction in attractions){
                     val attraction_name = attraction.text()
-                    Log.v("DestinatioActivity", "TEXT: " + attraction_name)
+
+                    Log.v("DestinatioActivity", "TEXT: " + attraction_name.toString())
+
                     list.add(
                         DestinationResultInformation(
                             attraction_name
                         )
                     )
                 }
-
 
             }catch (e: IOException){
                 e.printStackTrace()
@@ -79,7 +80,6 @@ class DestinationActivity : AppCompatActivity() {
         override fun onPostExecute(result: ArrayList<DestinationResultInformation>?) {
             destinationResultsRecyclerViewAdapter.notifyDataSetChanged()
         }
-
     }
 
 }
