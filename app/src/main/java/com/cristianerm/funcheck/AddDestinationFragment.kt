@@ -23,11 +23,6 @@ class AddDestinationFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        ///Put elements on the dropdown menu of airlines
-        val items = listOf("All", "Gol", "Latam", "Azul")
-        val adapter = ArrayAdapter(requireContext(), R.layout.list_item_general, items)
-        (airlines_text_input_add_destination.editText as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     override fun onCreateView(

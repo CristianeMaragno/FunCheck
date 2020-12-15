@@ -52,7 +52,6 @@ class DestinationActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: Void?): ArrayList<DestinationResultInformation> {
             try {
-                //list.clear()
                 val url = "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html"
                 val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
 

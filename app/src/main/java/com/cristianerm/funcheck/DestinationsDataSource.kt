@@ -10,16 +10,14 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "FLO X RIO",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "All"
+                    "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
                     "CUR X SP",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "Latam"
+                    "20/07/2020"
                 )
             )
 
@@ -27,32 +25,28 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "RG X RIO",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "Gol"
+                    "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
                     "PR X USA",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "All"
+                    "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
                     "BLU X AM",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "All"
+                    "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
                     "FLO X BA",
                     "14/07/2020 -",
-                    "20/07/2020",
-                    "Azul"
+                    "20/07/2020"
                 )
             )
             return list

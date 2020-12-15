@@ -107,37 +107,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/airlines_text_input_add_destination"
-                android:layout_width="0dp"
-                android:layout_weight=".50"
-                android:layout_height="wrap_content"
-                android:layout_margin="4dp"
-                android:hint="Filter airlines"
-                android:focusable="false"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-
-                <AutoCompleteTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:focusable="false"
-                    android:inputType="none" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-
-        <CheckBox
-            android:id="@+id/check_box_notifications_add_destination"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:checked="false"
-            android:text="Activate price notifications"/>
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/price_text_input_add_destination"
             android:layout_width="match_parent"
