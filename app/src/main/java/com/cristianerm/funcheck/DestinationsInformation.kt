@@ -2,6 +2,8 @@ package com.cristianerm.funcheck
 
 data class DestinationsInformation(
 
+    var origin: String,
+
     var destination: String,
 
     var date_go: String,
@@ -11,7 +13,7 @@ data class DestinationsInformation(
 ) {
 
     override fun toString(): String {
-        return "BlogPost(destination='$destination', date_go='$date_go', date_back='$date_back')"
+        return "BlogPost(origin='$origin',destination='$destination', date_go='$date_go', date_back='$date_back')"
     }
 
 

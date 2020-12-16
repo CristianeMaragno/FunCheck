@@ -8,14 +8,16 @@ class DestinationsDataSource{
             val list = ArrayList<DestinationsInformation>()
             list.add(
                 DestinationsInformation(
-                    "FLO X RIO",
+                    "Paris, France",
+                    "New York, USA",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
-                    "CUR X SP",
+                    "Rome, Italy",
+                    "London, UK",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
@@ -23,28 +25,32 @@ class DestinationsDataSource{
 
             list.add(
                 DestinationsInformation(
-                    "RG X RIO",
+                    "Tokyo, Japan",
+                    "Lisbon, Portugal",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
-                    "PR X USA",
+                    "Barcelona, Spain",
+                    "Honolulu, Hawaii",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
-                    "BLU X AM",
+                    "Istanbul, Turkey",
+                    "Bangkok, Thailand",
                     "14/07/2020 -",
                     "20/07/2020"
                 )
             )
             list.add(
                 DestinationsInformation(
-                    "FLO X BA",
+                    "Agra, India",
+                    "Cairo, Egypt",
                     "14/07/2020 -",
                     "20/07/2020"
                 )

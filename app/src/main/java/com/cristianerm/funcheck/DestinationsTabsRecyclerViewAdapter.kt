@@ -41,6 +41,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
 
+        val origin = itemView.text_origin_home
         val destination = itemView.text_destination_home
         val date_go = itemView.text_date_go_home
         val date_back = itemView.text_date_back_home
@@ -50,6 +51,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
 
         fun bind(destinationsHome: DestinationsInformation){
 
+            origin.setText(destinationsHome.origin)
             destination.setText(destinationsHome.destination)
             date_go.setText(destinationsHome.date_go)
             date_back.setText(destinationsHome.date_back)
