@@ -30,19 +30,19 @@
                     android:id="@+id/enable_all_radio_button_notifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Enable notification of all monitored destinations"
+                    android:text="Enable notification of all destinations"
                     android:layout_weight="1"/>
                 <RadioButton
                     android:id="@+id/enable_favorite_radio_button_notifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Enable notification of favorite monitored destinations"
+                    android:text="Enable notification of favorited destinations"
                     android:layout_weight="1"/>
                 <RadioButton
                     android:id="@+id/enable_marked_radio_button_notifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Enable notification only of marked destinations"
+                    android:text="Enable notification only of marked(with the bell) destinations"
                     android:layout_weight="1"/>
                 <RadioButton
                     android:id="@+id/disable_notifications_radio_button_notifications"
