@@ -10,7 +10,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Paris, France",
                     "New York, USA",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
@@ -18,7 +18,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Rome, Italy",
                     "London, UK",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
@@ -27,7 +27,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Tokyo, Japan",
                     "Lisbon, Portugal",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
@@ -35,7 +35,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Barcelona, Spain",
                     "Honolulu, Hawaii",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
@@ -43,7 +43,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Istanbul, Turkey",
                     "Bangkok, Thailand",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
@@ -51,7 +51,7 @@ class DestinationsDataSource{
                 DestinationsInformation(
                     "Agra, India",
                     "Cairo, Egypt",
-                    "14/07/2020 -",
+                    "14/07/2020",
                     "20/07/2020"
                 )
             )
