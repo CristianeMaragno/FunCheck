@@ -8,27 +8,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.resources.MaterialAttributes.resolveOrThrow
-import kotlinx.android.synthetic.main.fragment_add_destinations.*
-import kotlinx.android.synthetic.main.fragment_add_destinations.view.*
-import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.android.synthetic.main.fragment_new_destination.*
+import kotlinx.android.synthetic.main.fragment_new_destination.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-
-class AddDestinationFragment: Fragment() {
+class AddNewDestinationFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, destinations)
+        actv.setAdapter(adapter)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_destinations, container, false)
+        val view = inflater.inflate(R.layout.fragment_new_destination, container, false)
 
         view.close_add_destination.setOnClickListener({
             val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
@@ -44,14 +43,6 @@ class AddDestinationFragment: Fragment() {
                 back_date_edit_text_add_destination.isEnabled =false
             }else{
                 back_date_edit_text_add_destination.isEnabled =true
-            }
-        })
-
-        view.check_box_notifications_add_destination.setOnClickListener({
-            if(check_box_notifications_add_destination.isChecked()){
-                price_text_input_add_destination.visibility = View.VISIBLE
-            }else{
-                price_text_input_add_destination.visibility = View.GONE
             }
         })
 
@@ -128,5 +119,25 @@ class AddDestinationFragment: Fragment() {
             back_date_edit_text_add_destination.setText(date_back)
         }
     }
+
+    private val destinations = arrayOf(
+        "Paris, France", "New York, USA", "Rome, Italy", "London, UK", "Tokyo, Japan", "Lisbon, Portugal", "Barcelona, Spain",
+        "Honolulu, Hawaii", "Istanbul, Turkey", "Bangkok, Thailand", "Agra, India", "Cairo, Egypt", "Helsinki, Finland",
+        "Ubud, Bali, Indonesia", "Berlin, Germany", "Shanghai, China", "Las Vegas, USA", "Jerusalem, Israel", "Venice, Italy",
+        "Cape Town, South Africa", "Rio de Janeiro, Brazil", "Singapore, Singapore", "Toronto, Canada", "Seoul, South Korea",
+        "Casablanca, Morocco", "Mosco, Russia", "Sydney, Australia", "Lima, Peru", "Beijing, China", "Buenos Aires, Argentina",
+        "Edinburgh, Scotland", "Los Angeles, USA", "Copenhagen, Denmark", "Osaka, Japan", "Auckland, New Zealand", "Mumbai, India",
+        "Dubai, United Arab Emirates", "Munich, Germany", "Hong Kong, China", "Qatar, State of Qatar", "Seattle, USA", "Oslo, Norway",
+        "Bath, UK", "Athens, Greece", "Vienna, Austria", "Madrid, Spain", "Dublin, Republic of Ireland", "Florence, Italy",
+        "Bruges, Belgium", "Krakow, Poland", "Amsterdam, Holland", "Stockholm, Sweden", "Ljubljana, Slovenia", "Hanoi, Vietnam",
+        "Wellington, New Zealand", "Nice, France", "Vancouver, Canada", "Kiev, Ukraine", "Hallstatt, Austria", "Havana, Cuba",
+        "Mexico City, Mexico", "Beirut, Lebanon", "Salzburg, Austria", "Sao Paolo, Brazil", "Prague, Czech Republic", "Kyoto, Japan",
+        "Marrakech, Morocco", "St Petersburg, Russia", "San Francisco, USA", "Oxford, UK", "Melbourne, Australia", "Kingston, Jamaica",
+        "Amman, Jordan", "Lagos, Nigeria", "New Orleans, USA", "San Jose, Costa Rica", "Tallinn, Estonia", "Suva Fiji", "Jarkarta, Indonesia",
+        "New Delhi, India", "Adelaide, Australia", "Tripoli, Libya", "Male, Maldives", "Luxembourg, Luxembourg", "Kuala Lumpur, Malaysia",
+        "Glasgow, Scotland", "Valletta, Malta", "Kathmandu, Nepal", "Brussels, Belgium", "Panama City, Panama", "Bucharest, Romania",
+        "Cardiff, Wales", "Manila, Philippines", "Castries, Saint Lucia", "Apia, Samoa", "Bern, Switzerland", "Taipei, Taiwan",
+        "Hobart, Australia", "Budapest, Hungary", "Reykjavik, Iceland"
+    )
 
 }

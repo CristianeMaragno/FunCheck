@@ -22,6 +22,14 @@
             app:srcCompat="@drawable/ic_close"
             android:backgroundTint="@color/white"/>
 
+        <AutoCompleteTextView
+            android:id="@+id/actv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:completionHint="Select a country"
+            android:completionThreshold="1"
+            android:hint="Select a language" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/origin_text_input_add_destination"
             android:layout_width="match_parent"

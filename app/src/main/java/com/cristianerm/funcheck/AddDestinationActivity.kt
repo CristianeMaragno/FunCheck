@@ -13,7 +13,7 @@ class AddDestinationActivity : AppCompatActivity(), NavigationHost {
         if (savedInstanceState == null) {
             supportFragmentManager
                 .beginTransaction()
-                .add(R.id.container_add_new_destination, AddDestinationFragment())
+                .add(R.id.container_add_new_destination, AddNewDestinationFragment())
                 .commit()
         }
 
