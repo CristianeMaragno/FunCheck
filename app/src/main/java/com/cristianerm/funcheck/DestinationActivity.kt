@@ -25,8 +25,6 @@ class DestinationActivity : AppCompatActivity() {
         val date_go = intent.getStringExtra("date go")
         val date_back = intent.getStringExtra("date back")
 
-        val airline = intent.getStringExtra("airline")
-
         text_destination_destination.setText(destination)
         text_date_go_destination.setText(date_go)
         text_date_back_destination.setText(date_back)
@@ -52,7 +50,7 @@ class DestinationActivity : AppCompatActivity() {
 
         override fun doInBackground(vararg params: Void?): ArrayList<DestinationResultInformation> {
             try {
-                val url = "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html"
+                val url = getUrl()
                 val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
 
                 val attractionGrid = doc.getElementsByClass("_1h6gevVw")
@@ -79,6 +77,17 @@ class DestinationActivity : AppCompatActivity() {
         override fun onPostExecute(result: ArrayList<DestinationResultInformation>?) {
             destinationResultsRecyclerViewAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun getUrl(): String? {
+        val destination = intent.getStringExtra("destination")
+
+        val numbersMap = mapOf("New York, USA" to "https://www.tripadvisor.com.br/Attractions-g60763-Activities-New_York_City_New_York.html",
+            "London, UK" to "https://www.tripadvisor.com.br/Attractions-g303506-Activities-Rio_de_Janeiro_State_of_Rio_de_Janeiro.html",
+            "Lisbon, Portugal" to "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html",
+            "Honolulu, Hawaii" to "https://www.tripadvisor.com.br/Attractions-g187895-Activities-Florence_Tuscany.html")
+        
+        return numbersMap[destination]
     }
 
 }
