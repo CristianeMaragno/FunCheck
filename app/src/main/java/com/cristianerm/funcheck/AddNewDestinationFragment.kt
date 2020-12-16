@@ -20,8 +20,11 @@ class AddNewDestinationFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, destinations)
-        actv.setAdapter(adapter)
+        var adapter_origin = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, locations)
+        origin_edit_text_add_destination.setAdapter(adapter_origin)
+
+        var adapter_destination = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, locations)
+        destination_edit_text_add_destination.setAdapter(adapter_destination)
     }
 
     override fun onCreateView(
@@ -120,7 +123,7 @@ class AddNewDestinationFragment: Fragment() {
         }
     }
 
-    private val destinations = arrayOf(
+    private val locations = arrayOf(
         "Paris, France", "New York, USA", "Rome, Italy", "London, UK", "Tokyo, Japan", "Lisbon, Portugal", "Barcelona, Spain",
         "Honolulu, Hawaii", "Istanbul, Turkey", "Bangkok, Thailand", "Agra, India", "Cairo, Egypt", "Helsinki, Finland",
         "Ubud, Bali, Indonesia", "Berlin, Germany", "Shanghai, China", "Las Vegas, USA", "Jerusalem, Israel", "Venice, Italy",

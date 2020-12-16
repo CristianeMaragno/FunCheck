@@ -22,40 +22,37 @@
             app:srcCompat="@drawable/ic_close"
             android:backgroundTint="@color/white"/>
 
-        <AutoCompleteTextView
-            android:id="@+id/actv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:completionHint="Select a country"
-            android:completionThreshold="1"
-            android:hint="Select a language" />
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/origin_text_input_add_destination"
+            app:endIconMode="none"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:hint="Origin"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="Origin">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/origin_edit_text_add_destination"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/destination_text_input_add_destination"
+            app:endIconMode="none"
+            android:layout_marginTop="15dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
-            android:hint="Destination"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            android:hint="Destination">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <AutoCompleteTextView
                 android:id="@+id/destination_edit_text_add_destination"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@null"/>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <CheckBox
