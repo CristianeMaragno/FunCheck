@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.destination_item.view.*
 
 class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -40,12 +41,17 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
     ): RecyclerView.ViewHolder(itemView){
 
         val attraction_check_box = itemView.check_box_destination_item
-        val attraction_name = itemView.text_view_destination_item
+        //val attraction_name = itemView.text_view_destination_item
+
+        val attraction_image = itemView.image_view_destination_item
 
         fun bind(destinationResult: DestinationResultInformation){
 
-            attraction_name.setText(destinationResult.attraction_name)
+            //attraction_name.setText(destinationResult.attraction_name)
 
+            Picasso.get()
+                .load(destinationResult.imageUrl)
+                .into(attraction_image)
         }
 
     }
