@@ -2,13 +2,12 @@ package com.cristianerm.funcheck
 
 data class DestinationResultInformation(
 
-    //var attraction_name: String
-    var imageUrl: String
+    var attraction_name: String
 
 ) {
 
     override fun toString(): String {
-        return "BlogPost(imageUrl='$imageUrl')"
+        return "BlogPost(attraction_name='$attraction_name')"
     }
 
 

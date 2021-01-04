@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -36,6 +37,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
     implementation 'org.jsoup:jsoup:1.13.1'
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    compile 'com.google.firebase:firebase-auth:16.0.5'
 }

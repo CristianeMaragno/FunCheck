@@ -53,26 +53,7 @@ class DestinationActivity : AppCompatActivity() {
                 val url = getUrl()
                 val doc = Jsoup.connect(url).userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").timeout(10*1000).get()
 
-                list.add(DestinationResultInformation("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/13/f5/22/8f/perlan-stands-upon-reykjavik.jpg?w=300&h=-1&s=1"))
-
-                //val attractionGrid = doc.getElementsByClass("ZVAUHZqh")
-                val attractions = doc.getElementsByTag("img")
-                Log.v("DestinationActivity", "TEXT: " + "DOC: " + doc)
-
-                for (element in attractions) {
-                    val src = element.absUrl("src")
-                    Log.v("DestinationActivity", "TEXT: " + "src: " + src)
-
-                    /*if (src.isNotEmpty()){
-                        list.add(
-                            DestinationResultInformation(
-                                src
-                            )
-                        )
-                    }*/
-                }
-
-                /*val attractionGrid = doc.getElementsByClass("_1h6gevVw")
+                val attractionGrid = doc.getElementsByClass("_1h6gevVw")
                 val attractions = attractionGrid[0].getElementsByTag("h3")
 
                 for(attraction in attractions){
@@ -85,7 +66,7 @@ class DestinationActivity : AppCompatActivity() {
                             attraction_name
                         )
                     )
-                }*/
+                }
 
             }catch (e: IOException){
                 e.printStackTrace()
@@ -108,7 +89,7 @@ class DestinationActivity : AppCompatActivity() {
             "Tokyo, Japan" to "https://www.tripadvisor.com.br/Attractions-g298184-Activities-Tokyo_Tokyo_Prefecture_Kanto.html",
             "Lisbon, Portugal" to "https://www.tripadvisor.com.br/Attractions-g189158-Activities-Lisbon_Lisbon_District_Central_Portugal.html",
             "Barcelona, Spain" to "https://www.tripadvisor.com.br/Attractions-g187497-Activities-Barcelona_Catalonia.html",
-            "Honolulu, Hawaii" to "https://www.tripadvisor.com.br/Attractions-g60982-Activities-Honolulu_Oahu_Hawaii.html"/*,
+            "Honolulu, Hawaii" to "https://www.tripadvisor.com.br/Attractions-g60982-Activities-Honolulu_Oahu_Hawaii.html",
             "Istanbul, Turkey" to "https://www.tripadvisor.com.br/Attractions-g293974-Activities-Istanbul.html",
             "Bangkok, Thailand" to "https://www.tripadvisor.com.br/Attractions-g293916-Activities-Bangkok.html",
             "Agra, India" to "https://www.tripadvisor.com.br/Attractions-g297683-Activities-Agra_Agra_District_Uttar_Pradesh.html",
@@ -200,7 +181,7 @@ class DestinationActivity : AppCompatActivity() {
             "Taipei, Taiwan" to "https://www.tripadvisor.com.br/Attractions-g293913-Activities-Taipei.html",
             "Hobart, Australia" to "https://www.tripadvisor.com.br/Attractions-g255097-Activities-Hobart_Greater_Hobart_Tasmania.html",
             "Budapest, Hungary" to "https://www.tripadvisor.com.br/Attractions-g274887-Activities-Budapest_Central_Hungary.html",
-            "Reykjavik, Iceland" to "https://www.tripadvisor.com.br/Attractions-g189970-Activities-Reykjavik_Capital_Region.html"*/
+            "Reykjavik, Iceland" to "https://www.tripadvisor.com.br/Attractions-g189970-Activities-Reykjavik_Capital_Region.html"
             )
 
         return numbersMap[destination]

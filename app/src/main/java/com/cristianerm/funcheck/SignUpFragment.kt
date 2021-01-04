@@ -1,13 +1,18 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import com.google.android.gms.tasks.Task
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
@@ -16,6 +21,8 @@ import kotlinx.android.synthetic.main.fragment_sign_up.view.*
  * A simple [Fragment] subclass.
  */
 class SignUpFragment : Fragment() {
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -30,12 +37,41 @@ class SignUpFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_sign_up, container, false)
 
+        auth = FirebaseAuth.getInstance()
+
         view.sign_up_cadastrate_button.setOnClickListener({
-            val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
-            startActivity(intent)
+            val email = "criss@gmail.com"
+            val password = "123456"
+            createAccount(email, password)
         })
 
         return view
     }
 
+    private fun createAccount(email: String, password: String) {
+        // [START create_user_with_email]
+        /*auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(requireContext()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "createUserWithEmail:success")
+                    val user = auth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+                }
+            }*/
+        // [END create_user_with_email]
+
+        this.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
+            if (task.isSuccessful) {
+                //Registration OK
+                Log.v(TAG, "createUserWithEmail:success")
+                val firebaseUser = this.auth.currentUser!!
+            } else {
+                //Registration error
+                Log.v(TAG, "createUserWithEmail:failure", task.exception)
+            }
+        }
+    }
 }
