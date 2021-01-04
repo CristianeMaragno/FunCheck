@@ -1,21 +1,21 @@
 package com.cristianerm.funcheck
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.RadioButton
+import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
-
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
+
 
 /**
  * A simple [Fragment] subclass.
@@ -40,38 +40,40 @@ class SignUpFragment : Fragment() {
         auth = FirebaseAuth.getInstance()
 
         view.sign_up_cadastrate_button.setOnClickListener({
-            val email = "criss@gmail.com"
-            val password = "123456"
-            createAccount(email, password)
+            getSignUpInfo()
         })
 
         return view
     }
 
-    private fun createAccount(email: String, password: String) {
-        // [START create_user_with_email]
-        /*auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireContext()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    val user = auth.currentUser
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                }
-            }*/
-        // [END create_user_with_email]
+    private fun getSignUpInfo(){
+        val email = email_edit_text_sign_up.text.toString()
+        val password = password_edit_text_sign_up.text.toString()
+        val confirm_password = comfirm_password_edit_text_sign_up.text.toString()
+        val month_birth = month_auto_complete_sign_up.text.toString()
+        val day_birth = day_edit_text_sign_up.text.toString()
+        val year_birth = year_edit_text_sign_up.text.toString()
 
+        Log.v(TAG, email + " " + password + " " + confirm_password + " " + month_birth + " " + day_birth + " " + year_birth + " ")
+
+        //createAccount(email, password)
+    }
+
+    private fun createAccount(email: String, password: String) {
         this.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 //Registration OK
                 Log.v(TAG, "createUserWithEmail:success")
                 val firebaseUser = this.auth.currentUser!!
+                redirectsMainScreen()
             } else {
                 //Registration error
                 Log.v(TAG, "createUserWithEmail:failure", task.exception)
             }
         }
+    }
+
+    private fun redirectsMainScreen(){
+
     }
 }

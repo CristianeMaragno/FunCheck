@@ -29,7 +29,6 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/password_text_input_sign_up"
             android:layout_width="match_parent"
@@ -61,6 +60,12 @@
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Date of birth" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,6 +82,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
                 <AutoCompleteTextView
+                    android:id="@+id/month_auto_complete_sign_up"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"
@@ -122,33 +128,42 @@
 
         </LinearLayout>
 
+        <TextView
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Gender" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+
         <RadioGroup
             android:id="@+id/radio_group_sign_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <RadioButton
-            android:id="@+id/radio_button_male_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Male"
-            android:layout_weight="1"/>
-        <RadioButton
-            android:id="@+id/radio_button_female_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Female"
-            android:layout_weight="1"/>
-        <RadioButton
-            android:id="@+id/radio_button_nonbinary_sign_in"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Non-Binary"
-            android:layout_weight="1"/>
+
+            <RadioButton
+                android:id="@+id/radio_button_male_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Male"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/radio_button_female_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Female"
+                android:layout_weight="1"/>
+            <RadioButton
+                android:id="@+id/radio_button_nonbinary_sign_in"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Non-Binary"
+                android:layout_weight="1"/>
+
         </RadioGroup>
 
     </LinearLayout>
