@@ -1,6 +1,7 @@
 package com.cristianerm.funcheck
 
 import android.content.ContentValues.TAG
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -101,6 +102,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun redirectsMainScreen(){
-
+        val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
+        startActivity(intent)
     }
 }
