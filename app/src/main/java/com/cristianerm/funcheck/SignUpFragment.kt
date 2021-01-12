@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
@@ -30,6 +31,9 @@ class SignUpFragment : Fragment() {
     private var month_birth = ""
     private var day_birth = ""
     private var year_birth = ""
+    private var gender = ""
+    private lateinit var selectedRadioButton: RadioButton
+
 
     var database = FirebaseDatabase.getInstance()
     var myRef = database.getReference()
@@ -64,7 +68,21 @@ class SignUpFragment : Fragment() {
         day_birth = day_edit_text_sign_up.text.toString()
         year_birth = year_edit_text_sign_up.text.toString()
 
-        Log.v(TAG, email + " " + password + " " + confirm_password + " " + month_birth + " " + day_birth + " " + year_birth + " ")
+        val selectedRadioButtonId: Int = radio_group_sign_in.checkedRadioButtonId
+        if (selectedRadioButtonId != -1) {
+            val gender_id = resources.getResourceEntryName(selectedRadioButtonId)
+            if(gender_id == "radio_button_male_sign_in"){
+                gender = "male"
+            }else if(gender_id == "radio_button_female_sign_in"){
+                gender = "female"
+            }else if(gender_id == "radio_button_nonbinary_sign_in"){
+                gender = "nonbinary"
+            }else{
+                gender = "none selected"
+            }
+
+        }
+
 
         val form_validation = "success"
 
@@ -94,6 +112,7 @@ class SignUpFragment : Fragment() {
             myRef.child(uid).child("UserInfo").child("email").setValue(email)
             myRef.child(uid).child("UserInfo").child("password").setValue(password)
             myRef.child(uid).child("UserInfo").child("birth").setValue(month_birth + "/" + day_birth + "/" + year_birth)
+            myRef.child(uid).child("UserInfo").child("gender").setValue(gender)
         }catch (e: Exception){
             Log.v(TAG, e.toString())
         }
