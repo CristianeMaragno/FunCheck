@@ -23,6 +23,12 @@ import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 class SignUpFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private var email = ""
+    private var password = ""
+    private var confirm_password = ""
+    private var month_birth = ""
+    private var day_birth = ""
+    private var year_birth = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,30 +53,41 @@ class SignUpFragment : Fragment() {
     }
 
     private fun getSignUpInfo(){
-        val email = email_edit_text_sign_up.text.toString()
-        val password = password_edit_text_sign_up.text.toString()
-        val confirm_password = comfirm_password_edit_text_sign_up.text.toString()
-        val month_birth = month_auto_complete_sign_up.text.toString()
-        val day_birth = day_edit_text_sign_up.text.toString()
-        val year_birth = year_edit_text_sign_up.text.toString()
+        email = email_edit_text_sign_up.text.toString()
+        password = password_edit_text_sign_up.text.toString()
+        confirm_password = comfirm_password_edit_text_sign_up.text.toString()
+        month_birth = month_auto_complete_sign_up.text.toString()
+        day_birth = day_edit_text_sign_up.text.toString()
+        year_birth = year_edit_text_sign_up.text.toString()
 
         Log.v(TAG, email + " " + password + " " + confirm_password + " " + month_birth + " " + day_birth + " " + year_birth + " ")
 
-        //createAccount(email, password)
+        val form_validation = "success"
+
+        if(form_validation == "success"){
+            createAccount(email, password)
+        }
     }
 
-    private fun createAccount(email: String, password: String) {
+    private fun createAccount(email: String, password: String){
         this.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener { task: Task<AuthResult> ->
             if (task.isSuccessful) {
                 //Registration OK
                 Log.v(TAG, "createUserWithEmail:success")
                 val firebaseUser = this.auth.currentUser!!
-                redirectsMainScreen()
+                val user = firebaseUser.toString()
+                writeUserOnDatabase(user)
             } else {
                 //Registration error
                 Log.v(TAG, "createUserWithEmail:failure", task.exception)
             }
+
         }
+    }
+
+    private fun writeUserOnDatabase(user: String){
+        Log.v(TAG, "writeUserOnDatabase")
+
     }
 
     private fun redirectsMainScreen(){
