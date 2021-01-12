@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.RadioButton
 import androidx.fragment.app.Fragment
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 
@@ -29,6 +29,9 @@ class SignUpFragment : Fragment() {
     private var month_birth = ""
     private var day_birth = ""
     private var year_birth = ""
+
+    var database = FirebaseDatabase.getInstance()
+    var myRef = database.getReference()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,8 +78,8 @@ class SignUpFragment : Fragment() {
                 //Registration OK
                 Log.v(TAG, "createUserWithEmail:success")
                 val firebaseUser = this.auth.currentUser!!
-                val user = firebaseUser.toString()
-                writeUserOnDatabase(user)
+                val uid = firebaseUser.uid
+                writeUserOnDatabase(uid)
             } else {
                 //Registration error
                 Log.v(TAG, "createUserWithEmail:failure", task.exception)
@@ -85,9 +88,16 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    private fun writeUserOnDatabase(user: String){
-        Log.v(TAG, "writeUserOnDatabase")
+    private fun writeUserOnDatabase(uid: String){
+        try {
+            myRef.child(uid).child("UserInfo").child("email").setValue(email)
+            myRef.child(uid).child("UserInfo").child("password").setValue(password)
+            myRef.child(uid).child("UserInfo").child("birth").setValue(month_birth + "/" + day_birth + "/" + year_birth)
+        }catch (e: Exception){
+            Log.v(TAG, e.toString())
+        }
 
+        redirectsMainScreen()
     }
 
     private fun redirectsMainScreen(){
