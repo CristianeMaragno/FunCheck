@@ -27,6 +27,8 @@ class LoginFragment: Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_login, container, false)
 
+        auth = FirebaseAuth.getInstance()
+
         view.log_in_button.setOnClickListener({
             getLogInInfo()
         })
@@ -48,7 +50,6 @@ class LoginFragment: Fragment() {
     }
 
     private fun logIn(email: String, password: String){
-        auth = FirebaseAuth.getInstance()
 
         this.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -61,7 +62,6 @@ class LoginFragment: Fragment() {
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
                 }
         }
-
 
     }
 

@@ -1,5 +1,6 @@
 package com.cristianerm.funcheck
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -10,13 +11,18 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.core.view.GravityCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main_functionalities.*
 
 class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_functionalities)
+
+        auth = FirebaseAuth.getInstance()
 
         setSupportActionBar(app_bar_monitored_destinations)
 
@@ -84,7 +90,12 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
                 ChangePasswordFragment()
             ).commit()
 
-            R.id.nav_log_out_fragment -> Toast.makeText(this, "Test nav_third_fragment clicked", Toast.LENGTH_LONG).show()
+            R.id.nav_log_out_fragment -> {
+                auth.signOut()
+
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
