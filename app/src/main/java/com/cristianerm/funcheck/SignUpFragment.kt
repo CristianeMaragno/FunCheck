@@ -25,6 +25,7 @@ import kotlinx.android.synthetic.main.fragment_sign_up.view.*
 class SignUpFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+
     private var email = ""
     private var password = ""
     private var confirm_password = ""
@@ -84,7 +85,6 @@ class SignUpFragment : Fragment() {
             }
 
         }
-
 
         val form_validation = "success"
 
