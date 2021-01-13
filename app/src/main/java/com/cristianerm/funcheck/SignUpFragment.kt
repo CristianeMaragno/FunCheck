@@ -61,6 +61,8 @@ class SignUpFragment : Fragment() {
     }
 
     private fun getSignUpInfo(){
+        disableForm()
+
         email = email_edit_text_sign_up.text.toString()
         password = password_edit_text_sign_up.text.toString()
         confirm_password = comfirm_password_edit_text_sign_up.text.toString()
@@ -98,10 +100,15 @@ class SignUpFragment : Fragment() {
                 Log.v(TAG, "createUserWithEmail:success")
                 val firebaseUser = this.auth.currentUser!!
                 val uid = firebaseUser.uid
+
+                enableForm()
+                clearForm()
+
                 writeUserOnDatabase(uid)
             } else {
                 //Registration error
                 Log.v(TAG, "createUserWithEmail:failure", task.exception)
+                enableForm()
             }
 
         }
@@ -123,5 +130,36 @@ class SignUpFragment : Fragment() {
     private fun redirectsMainScreen(){
         val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
         startActivity(intent)
+    }
+
+
+    private fun disableForm(){
+        email_edit_text_sign_up.isEnabled = false
+        password_edit_text_sign_up.isEnabled = false
+        comfirm_password_edit_text_sign_up.isEnabled = false
+        month_auto_complete_sign_up.isEnabled = false
+        day_edit_text_sign_up.isEnabled = false
+        year_edit_text_sign_up.isEnabled = false
+        radio_group_sign_in.isEnabled = false
+    }
+
+    private fun enableForm(){
+        email_edit_text_sign_up.isEnabled = true
+        password_edit_text_sign_up.isEnabled = true
+        comfirm_password_edit_text_sign_up.isEnabled = true
+        month_auto_complete_sign_up.isEnabled = true
+        day_edit_text_sign_up.isEnabled = true
+        year_edit_text_sign_up.isEnabled = true
+        radio_group_sign_in.isEnabled = true
+    }
+
+    private fun clearForm(){
+        email_edit_text_sign_up.text?.clear()
+        password_edit_text_sign_up.text?.clear()
+        comfirm_password_edit_text_sign_up.text?.clear()
+        month_auto_complete_sign_up.text?.clear()
+        day_edit_text_sign_up.text?.clear()
+        year_edit_text_sign_up.text?.clear()
+        radio_group_sign_in.clearCheck()
     }
 }
