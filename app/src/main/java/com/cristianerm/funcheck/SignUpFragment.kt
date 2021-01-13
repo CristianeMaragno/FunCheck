@@ -120,6 +120,8 @@ class SignUpFragment : Fragment() {
             myRef.child(uid).child("UserInfo").child("password").setValue(password)
             myRef.child(uid).child("UserInfo").child("birth").setValue(month_birth + "/" + day_birth + "/" + year_birth)
             myRef.child(uid).child("UserInfo").child("gender").setValue(gender)
+
+            myRef.child(uid).child("Notification").child("notification").setValue("0")
         }catch (e: Exception){
             Log.v(TAG, e.toString())
         }
