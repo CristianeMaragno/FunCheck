@@ -43,6 +43,8 @@ class LoginFragment: Fragment() {
     }
 
     private fun getLogInInfo(){
+        disableForm()
+
         email = email_edit_text_log_in.text.toString()
         password = password_edit_text_log_in.text.toString()
 
@@ -56,10 +58,15 @@ class LoginFragment: Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
+
+                    enableForm()
+                    clearForm()
                     redirectsMainScreen()
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
+
+                    enableForm()
                 }
         }
 
@@ -68,5 +75,20 @@ class LoginFragment: Fragment() {
     private fun redirectsMainScreen(){
         val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun disableForm(){
+        email_edit_text_log_in.isEnabled = false
+        password_edit_text_log_in.isEnabled = false
+    }
+
+    private fun enableForm(){
+        email_edit_text_log_in.isEnabled = true
+        password_edit_text_log_in.isEnabled = true
+    }
+
+    private fun clearForm(){
+        email_edit_text_log_in.text?.clear()
+        password_edit_text_log_in.text?.clear()
     }
 }
