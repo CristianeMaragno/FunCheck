@@ -88,9 +88,9 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/go_date_edit_text_add_destination"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="59dp"
                     android:inputType="date"
-                    android:maxLength="10"/>
+                    android:maxLength="10" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

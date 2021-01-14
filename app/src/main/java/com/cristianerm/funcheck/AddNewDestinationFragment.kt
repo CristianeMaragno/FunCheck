@@ -1,9 +1,11 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +18,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class AddNewDestinationFragment: Fragment() {
+
+    private var origin = ""
+    private var destination = ""
+    private var dateGo = ""
+    private var dateBack = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,13 +39,13 @@ class AddNewDestinationFragment: Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_new_destination, container, false)
 
+        view.pick_date_add_destination_button.setOnClickListener({
+            openDatePicker()
+        })
+
         view.close_add_destination.setOnClickListener({
             val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
             startActivity(intent)
-        })
-
-        view.pick_date_add_destination_button.setOnClickListener({
-            openDatePicker()
         })
 
         view.check_box_just_go_add_destination.setOnClickListener({
@@ -81,7 +88,29 @@ class AddNewDestinationFragment: Fragment() {
             }
         })
 
+        view.add_destination_button.setOnClickListener({
+            getNewDestinationInfo()
+        })
+
         return view
+    }
+
+    private fun getNewDestinationInfo(){
+        origin = origin_edit_text_add_destination.text.toString()
+        destination = destination_edit_text_add_destination.text.toString()
+        dateGo = go_date_edit_text_add_destination.text.toString()
+        dateBack = back_date_edit_text_add_destination.text.toString()
+
+        Log.v(ContentValues.TAG, origin)
+        Log.v(ContentValues.TAG, destination)
+        Log.v(ContentValues.TAG, dateGo)
+        Log.v(ContentValues.TAG, dateBack)
+
+        //writeDestinationOnDatabase()
+    }
+
+    private fun writeDestinationOnDatabase(){
+
     }
 
     private fun openDatePicker(){
