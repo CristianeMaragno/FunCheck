@@ -63,7 +63,7 @@ class ChangePasswordFragment : Fragment() {
 
         Log.v(ContentValues.TAG, "CHANGE password")
 
-        //firebaseUser.updatePassword(newPassword)
+        firebaseUser.updatePassword(newPassword)
     }
 
 }
