@@ -26,6 +26,9 @@ class SignUpFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
 
+    var database = FirebaseDatabase.getInstance()
+    var myRef = database.getReference()
+
     private var email = ""
     private var password = ""
     private var confirm_password = ""
@@ -35,9 +38,6 @@ class SignUpFragment : Fragment() {
     private var gender = ""
     private lateinit var selectedRadioButton: RadioButton
 
-
-    var database = FirebaseDatabase.getInstance()
-    var myRef = database.getReference()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

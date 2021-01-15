@@ -12,6 +12,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.fragment_new_destination.*
 import kotlinx.android.synthetic.main.fragment_new_destination.view.*
 import java.text.SimpleDateFormat
@@ -19,10 +21,16 @@ import java.util.*
 
 class AddNewDestinationFragment: Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+
+    var database = FirebaseDatabase.getInstance()
+    var myRef = database.getReference()
+
     private var origin = ""
     private var destination = ""
     private var dateGo = ""
     private var dateBack = ""
+    private var uid = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,6 +46,10 @@ class AddNewDestinationFragment: Fragment() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_new_destination, container, false)
+
+        auth = FirebaseAuth.getInstance()
+        val firebaseUser = this.auth.currentUser!!
+        uid = firebaseUser.uid
 
         view.pick_date_add_destination_button.setOnClickListener({
             openDatePicker()
@@ -96,21 +108,44 @@ class AddNewDestinationFragment: Fragment() {
     }
 
     private fun getNewDestinationInfo(){
+        disableForm()
+
         origin = origin_edit_text_add_destination.text.toString()
         destination = destination_edit_text_add_destination.text.toString()
         dateGo = go_date_edit_text_add_destination.text.toString()
         dateBack = back_date_edit_text_add_destination.text.toString()
 
-        Log.v(ContentValues.TAG, origin)
-        Log.v(ContentValues.TAG, destination)
-        Log.v(ContentValues.TAG, dateGo)
-        Log.v(ContentValues.TAG, dateBack)
-
-        //writeDestinationOnDatabase()
+        writeDestinationOnDatabase()
     }
 
     private fun writeDestinationOnDatabase(){
 
+        try{
+
+            var key = myRef.push().key
+            if (key != null) {
+                myRef.child(uid).child("Destinations").child(key).child("origin").setValue(origin)
+                myRef.child(uid).child("Destinations").child(key).child("destination").setValue(destination)
+                myRef.child(uid).child("Destinations").child(key).child("dateGo").setValue(dateGo)
+                if (dateBack.isNotEmpty()){
+                    myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue(dateBack)
+                }else{
+                    myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue("none")
+                }
+            }
+            enableForm()
+            clearForm()
+            redirectsMainScreen()
+
+        }catch (e: Exception){
+            Log.v(ContentValues.TAG, e.toString())
+        }
+
+    }
+
+    private fun redirectsMainScreen(){
+        val intent = Intent(activity, MainFunctionalitiesActivity::class.java)
+        startActivity(intent)
     }
 
     private fun openDatePicker(){
@@ -149,6 +184,37 @@ class AddNewDestinationFragment: Fragment() {
             var date_back = sdf.format(date_epoch_back?.let { it1 -> Date(it1) }).toString()
             go_date_edit_text_add_destination.setText(date_departure)
             back_date_edit_text_add_destination.setText(date_back)
+        }
+    }
+
+    private fun disableForm(){
+        origin_edit_text_add_destination.isEnabled = false
+        destination_edit_text_add_destination.isEnabled = false
+        go_date_edit_text_add_destination.isEnabled = false
+        back_date_edit_text_add_destination.isEnabled = false
+    }
+
+    private fun enableForm(){
+        origin_edit_text_add_destination.isEnabled = true
+        destination_edit_text_add_destination.isEnabled = true
+        go_date_edit_text_add_destination.isEnabled = true
+        if(check_box_just_go_add_destination.isChecked()){
+            back_date_edit_text_add_destination.isEnabled = false
+        }else{
+            back_date_edit_text_add_destination.isEnabled = true
+        }
+
+    }
+
+    private fun clearForm(){
+        origin_edit_text_add_destination.text?.clear()
+        destination_edit_text_add_destination.text?.clear()
+        go_date_edit_text_add_destination.text?.clear()
+        if(check_box_just_go_add_destination.isChecked()){
+            back_date_edit_text_add_destination.isEnabled = true
+            back_date_edit_text_add_destination.text?.clear()
+        }else{
+            back_date_edit_text_add_destination.text?.clear()
         }
     }
 
