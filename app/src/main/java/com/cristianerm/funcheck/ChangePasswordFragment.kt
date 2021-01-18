@@ -1,6 +1,7 @@
 package com.cristianerm.funcheck
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,12 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_change_password.*
 import kotlinx.android.synthetic.main.fragment_change_password.view.*
+
 
 class ChangePasswordFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseDatase: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
+    private lateinit var firebaseUser: FirebaseUser
 
     private var currentPassword = ""
     private var newPassword = ""
@@ -25,6 +32,8 @@ class ChangePasswordFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_change_password, container, false)
 
         auth = FirebaseAuth.getInstance()
+        firebaseDatase = FirebaseDatabase.getInstance()
+        firebaseUser = this.auth.currentUser!!
 
         view.change_password_button.setOnClickListener({
             getNewPasswordInfo()
@@ -49,18 +58,39 @@ class ChangePasswordFragment : Fragment() {
 
         if (newPassword.equals(ConfirmNewPassword)){
             Log.v(ContentValues.TAG, "New pass is equal to confirm new pass")
-            if (currentPassword == "123456"){
-                changeUserPassword(newPassword)
-            }
+            verifyCurrentPassword()
         }else{
             Log.v(ContentValues.TAG, "New pass is NOT equal to confirm new pass")
         }
     }
 
+    private fun verifyCurrentPassword(){
+        val uid = firebaseUser.uid
+        myRef = firebaseDatase.getReference().child(uid).child("UserInfo")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val user = dataSnapshot.getValue(UserInformation::class.java)
+                var trueCurrentPassword = user!!.password
+
+                if(trueCurrentPassword == currentPassword){
+                    changeUserPassword(newPassword)
+                }else{
+
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+
+        myRef.addValueEventListener(postListener)
+    }
+
     private fun changeUserPassword(newPassword: String){
-
-        val firebaseUser = this.auth.currentUser!!
-
         Log.v(ContentValues.TAG, "CHANGE password")
 
         firebaseUser.updatePassword(newPassword)
