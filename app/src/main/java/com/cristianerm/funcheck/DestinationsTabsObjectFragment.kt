@@ -1,20 +1,36 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_destinations.*
 
 class DestinationsTabsObjectFragment : Fragment() {
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseDatase: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
+    private lateinit var firebaseUser: FirebaseUser
+
     private lateinit var destinationsTabsRecyclerViewAdapter: DestinationsTabsRecyclerViewAdapter
+    var list = ArrayList<DestinationsInformation>()
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
+
+        auth = FirebaseAuth.getInstance()
+        firebaseDatase = FirebaseDatabase.getInstance()
+        firebaseUser = this.auth.currentUser!!
+
         return inflater.inflate(R.layout.fragment_destinations, container, false)
     }
 
@@ -29,7 +45,6 @@ class DestinationsTabsObjectFragment : Fragment() {
                 addDataSet()
 
             }else{
-
                 initRecyclerView()
                 addDataSet()
             }
@@ -39,8 +54,48 @@ class DestinationsTabsObjectFragment : Fragment() {
     }
 
     private fun addDataSet(){
-        val data = DestinationsDataSource.createDataSet()
-        destinationsTabsRecyclerViewAdapter.submitList(data)
+        val uid = firebaseUser.uid
+        myRef = firebaseDatase.getReference().child(uid).child("Destinations")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for (ds in dataSnapshot.children) {
+                    val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                    var origin = destinationInformation!!.origin
+                    var destination = destinationInformation!!.destination
+                    var dateGo = destinationInformation!!.dateGo
+                    var dateBack = destinationInformation!!.dateBack
+
+                    Log.v(ContentValues.TAG, "DESTINATION: " + origin)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + destination)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + dateGo)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + dateBack)
+
+                    list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
+                }
+
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+
+        myRef.addValueEventListener(postListener)
+
+        list.add(
+            DestinationsInformation(
+                "Paris, France",
+                "New York, USA",
+                "14/07/2020",
+                "20/07/2020"
+            )
+        )
+
+        destinationsTabsRecyclerViewAdapter.submitList(list)
     }
 
     private fun initRecyclerView(){
