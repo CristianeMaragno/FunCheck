@@ -74,7 +74,8 @@ class DestinationsTabsObjectFragment : Fragment() {
 
                     list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
                 }
-
+                destinationsTabsRecyclerViewAdapter.notifyDataSetChanged()
+                destinationsTabsRecyclerViewAdapter.submitList(list)
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
@@ -86,16 +87,6 @@ class DestinationsTabsObjectFragment : Fragment() {
 
         myRef.addValueEventListener(postListener)
 
-        list.add(
-            DestinationsInformation(
-                "Paris, France",
-                "New York, USA",
-                "14/07/2020",
-                "20/07/2020"
-            )
-        )
-
-        destinationsTabsRecyclerViewAdapter.submitList(list)
     }
 
     private fun initRecyclerView(){

@@ -76,7 +76,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 intent.putExtra("date go", date_go_text)
                 intent.putExtra("date back", date_back_text)
                 view.getContext().startActivity(intent)
-
             }
 
         }

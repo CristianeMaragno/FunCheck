@@ -13,7 +13,7 @@ data class DestinationsInformation(
 ) {
 
     override fun toString(): String {
-        return "BlogPost(origin='$origin',destination='$destination', date_go='$date_go', date_back='$date_back')"
+        return "Destination(origin='$origin',destination='$destination', date_go='$date_go', date_back='$date_back')"
     }
 
 
