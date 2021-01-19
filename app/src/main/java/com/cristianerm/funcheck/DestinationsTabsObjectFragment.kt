@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_destinations.*
 class DestinationsTabsObjectFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var firebaseDatase: FirebaseDatabase
+    private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
     private lateinit var firebaseUser: FirebaseUser
 
@@ -28,7 +28,7 @@ class DestinationsTabsObjectFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
 
         auth = FirebaseAuth.getInstance()
-        firebaseDatase = FirebaseDatabase.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance()
         firebaseUser = this.auth.currentUser!!
 
         return inflater.inflate(R.layout.fragment_destinations, container, false)
@@ -55,10 +55,12 @@ class DestinationsTabsObjectFragment : Fragment() {
 
     private fun addDataSet(){
         val uid = firebaseUser.uid
-        myRef = firebaseDatase.getReference().child(uid).child("Destinations")
+        myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.clear()
+
                 for (ds in dataSnapshot.children) {
                     val destinationInformation = ds.getValue(DestinationInformation::class.java)
 

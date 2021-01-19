@@ -1,11 +1,17 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.destinations_item.view.*
 
 class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -20,7 +26,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when(holder) {
-
             is DestinationsHomeViewHolder -> {
                 holder.bind(items.get(position))
             }
@@ -40,7 +45,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
     constructor(
         itemView: View
     ): RecyclerView.ViewHolder(itemView){
-
         val origin = itemView.text_origin_home
         val destination = itemView.text_destination_home
         val date_go = itemView.text_date_go_home
@@ -50,6 +54,12 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
         val button_notifications = itemView.notifications_button_home
 
         fun bind(destinationsHome: DestinationsInformation){
+            var auth= FirebaseAuth.getInstance()
+            var firebaseDatabase= FirebaseDatabase.getInstance()
+            var firebaseUser = auth.currentUser!!
+
+            val uid = firebaseUser.uid
+            var myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
 
             origin.setText(destinationsHome.origin)
             destination.setText(destinationsHome.destination)
@@ -57,7 +67,36 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             date_back.setText(destinationsHome.date_back)
 
             button_favorite.setOnClickListener(View.OnClickListener {
-                button_favorite.setImageResource(R.drawable.ic_favorite)
+                //button_favorite.setImageResource(R.drawable.ic_favorite)
+                var originSelected = origin.text.toString()
+                var destinationSelected = destination.text.toString()
+                var dateGoSelected = date_go.text.toString()
+                var dateBackSelected = date_back.text.toString()
+
+                val postListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (ds in dataSnapshot.children) {
+                            val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                            var origin = destinationInformation!!.origin
+                            var destination = destinationInformation!!.destination
+                            var dateGo = destinationInformation!!.dateGo
+                            var dateBack = destinationInformation!!.dateBack
+
+                            if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
+                                val key = ds.key
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Getting Post failed, log a message
+                        Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                        // ...
+                    }
+                }
+
+                myRef.addValueEventListener(postListener)
             })
 
             button_notifications.setOnClickListener(View.OnClickListener {
