@@ -127,6 +127,7 @@ class AddNewDestinationFragment: Fragment() {
                 myRef.child(uid).child("Destinations").child(key).child("origin").setValue(origin)
                 myRef.child(uid).child("Destinations").child(key).child("destination").setValue(destination)
                 myRef.child(uid).child("Destinations").child(key).child("dateGo").setValue(dateGo)
+                myRef.child(uid).child("Destinations").child(key).child("favorited").setValue("0")
                 if (dateBack.isNotEmpty()){
                     myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue(dateBack)
                 }else{

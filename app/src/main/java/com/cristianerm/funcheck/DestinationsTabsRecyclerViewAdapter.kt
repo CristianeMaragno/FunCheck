@@ -73,7 +73,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 var dateGoSelected = date_go.text.toString()
                 var dateBackSelected = date_back.text.toString()
 
-                val postListener = object : ValueEventListener {
+                val destinationListener = object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (ds in dataSnapshot.children) {
                             val destinationInformation = ds.getValue(DestinationInformation::class.java)
@@ -83,8 +83,25 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                             var dateGo = destinationInformation!!.dateGo
                             var dateBack = destinationInformation!!.dateBack
 
+
                             if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
-                                val key = ds.key
+                                Log.v("AdapterRecyclerView", "DESTINATION FOUND")
+                                val key: String? = ds.key
+                                var favorited = destinationInformation!!.favorited
+                                Log.v("AdapterRecyclerView", "FAVORITED: " + favorited)
+                                if(favorited.equals("0")){
+                                    if (key != null) {
+                                        myRef.child(key).child("favorited").setValue("1")
+                                        button_favorite.setImageResource(R.drawable.ic_favorite)
+                                    }
+                                }else{
+                                    if(key != null) {
+                                        myRef.child(key).child("favorited").setValue("0")
+                                        button_favorite.setImageResource(R.drawable.ic_favorite_none)
+                                    }
+                                }
+                            }else{
+
                             }
                         }
                     }
@@ -96,7 +113,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                     }
                 }
 
-                myRef.addValueEventListener(postListener)
+                myRef.addListenerForSingleValueEvent(destinationListener)
             })
 
             button_notifications.setOnClickListener(View.OnClickListener {
