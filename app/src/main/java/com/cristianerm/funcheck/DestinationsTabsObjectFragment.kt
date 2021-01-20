@@ -12,6 +12,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_destinations.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 class DestinationsTabsObjectFragment : Fragment() {
 
@@ -79,6 +81,7 @@ class DestinationsTabsObjectFragment : Fragment() {
                         list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
                     }
                 }
+                list.reverse()
                 destinationsTabsRecyclerViewAdapter.notifyDataSetChanged()
                 destinationsTabsRecyclerViewAdapter.submitList(list)
             }
@@ -120,6 +123,7 @@ class DestinationsTabsObjectFragment : Fragment() {
                         list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
                     }
                 }
+                list.reverse()
                 destinationsTabsRecyclerViewAdapter.notifyDataSetChanged()
                 destinationsTabsRecyclerViewAdapter.submitList(list)
             }
