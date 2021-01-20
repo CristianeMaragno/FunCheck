@@ -1,7 +1,9 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,11 +14,16 @@ import androidx.core.view.GravityCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main_functionalities.*
+import java.lang.Exception
 
 class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebaseDatabase: FirebaseDatabase
+    private lateinit var myRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +40,6 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
         app_bar_monitored_destinations.setOnMenuItemClickListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.menu_icon_more -> {
-                    Toast.makeText(this, "Test item clicked", Toast.LENGTH_LONG).show()
                     val menuItemView: View = findViewById(R.id.menu_icon_more)
                     showPopup(menuItemView)
                     true
@@ -117,7 +123,21 @@ class MainFunctionalitiesActivity : AppCompatActivity(), NavigationView.OnNaviga
                             // Respond to negative button press
                         }
                         .setPositiveButton(resources.getString(R.string.yes)) { dialog, which ->
-                            // Respond to positive button press
+                            try {
+                                var firebaseUser = this.auth.currentUser!!
+                                val uid = firebaseUser.uid
+                                firebaseDatabase = FirebaseDatabase.getInstance()
+                                myRef = firebaseDatabase.getReference().child(uid)
+
+                                myRef.removeValue()
+                                firebaseUser.delete()
+
+                                val intent = Intent(this, LoginActivity::class.java)
+                                startActivity(intent)
+                            }catch (e: Exception){
+                                Log.v("MainFunctionalities", "Delete User Error: " + e.toString())
+                            }
+
                         }
                         .show()
                 }

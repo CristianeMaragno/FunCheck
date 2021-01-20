@@ -131,7 +131,7 @@ class AddNewDestinationFragment: Fragment() {
                 if (dateBack.isNotEmpty()){
                     myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue(dateBack)
                 }else{
-                    myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue("none")
+                    myRef.child(uid).child("Destinations").child(key).child("dateBack").setValue("No return date")
                 }
             }
             enableForm()

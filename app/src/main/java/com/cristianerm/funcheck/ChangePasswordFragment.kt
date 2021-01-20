@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_change_password.view.*
 class ChangePasswordFragment : Fragment() {
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var firebaseDatase: FirebaseDatabase
+    private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var myRef: DatabaseReference
     private lateinit var firebaseUser: FirebaseUser
 
@@ -32,7 +32,7 @@ class ChangePasswordFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_change_password, container, false)
 
         auth = FirebaseAuth.getInstance()
-        firebaseDatase = FirebaseDatabase.getInstance()
+        firebaseDatabase = FirebaseDatabase.getInstance()
         firebaseUser = this.auth.currentUser!!
 
         view.change_password_button.setOnClickListener({
@@ -66,7 +66,7 @@ class ChangePasswordFragment : Fragment() {
 
     private fun verifyCurrentPassword(){
         val uid = firebaseUser.uid
-        myRef = firebaseDatase.getReference().child(uid).child("UserInfo")
+        myRef = firebaseDatabase.getReference().child(uid).child("UserInfo")
 
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
