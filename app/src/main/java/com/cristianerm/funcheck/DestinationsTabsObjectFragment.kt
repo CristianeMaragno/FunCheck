@@ -46,7 +46,7 @@ class DestinationsTabsObjectFragment : Fragment() {
 
             }else{
                 initRecyclerView()
-                addDataSet()
+                addDataSetFavorited()
             }
 
 
@@ -68,13 +68,57 @@ class DestinationsTabsObjectFragment : Fragment() {
                     var destination = destinationInformation!!.destination
                     var dateGo = destinationInformation!!.dateGo
                     var dateBack = destinationInformation!!.dateBack
+                    var favorited = destinationInformation!!.favorited
 
                     Log.v(ContentValues.TAG, "DESTINATION: " + origin)
                     Log.v(ContentValues.TAG, "DESTINATION: " + destination)
                     Log.v(ContentValues.TAG, "DESTINATION: " + dateGo)
                     Log.v(ContentValues.TAG, "DESTINATION: " + dateBack)
 
-                    list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
+                    if (favorited == "0"){
+                        list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
+                    }
+                }
+                destinationsTabsRecyclerViewAdapter.notifyDataSetChanged()
+                destinationsTabsRecyclerViewAdapter.submitList(list)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                // ...
+            }
+        }
+
+        myRef.addValueEventListener(postListener)
+
+    }
+
+    private fun addDataSetFavorited(){
+        val uid = firebaseUser.uid
+        myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                list.clear()
+
+                for (ds in dataSnapshot.children) {
+                    val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                    var origin = destinationInformation!!.origin
+                    var destination = destinationInformation!!.destination
+                    var dateGo = destinationInformation!!.dateGo
+                    var dateBack = destinationInformation!!.dateBack
+                    var favorited = destinationInformation!!.favorited
+
+                    Log.v(ContentValues.TAG, "DESTINATION: " + origin)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + destination)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + dateGo)
+                    Log.v(ContentValues.TAG, "DESTINATION: " + dateBack)
+
+                    if (favorited == "1"){
+                        list.add(DestinationsInformation(origin, destination, dateGo, dateBack))
+                    }
                 }
                 destinationsTabsRecyclerViewAdapter.notifyDataSetChanged()
                 destinationsTabsRecyclerViewAdapter.submitList(list)
