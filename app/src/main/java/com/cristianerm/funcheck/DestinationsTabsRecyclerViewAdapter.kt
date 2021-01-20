@@ -65,13 +65,44 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
             date_go.setText(destinationsHome.date_go)
             date_back.setText(destinationsHome.date_back)
 
-            button_favorite.setOnClickListener(View.OnClickListener {
-                //button_favorite.setImageResource(R.drawable.ic_favorite)
-                var originSelected = origin.text.toString()
-                var destinationSelected = destination.text.toString()
-                var dateGoSelected = date_go.text.toString()
-                var dateBackSelected = date_back.text.toString()
+            var originSelected = origin.text.toString()
+            var destinationSelected = destination.text.toString()
+            var dateGoSelected = date_go.text.toString()
+            var dateBackSelected = date_back.text.toString()
 
+            val destinationListenerFavorited = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val destinationInformationFavorited = ds.getValue(DestinationInformation::class.java)
+                        var favoritedBefore = destinationInformationFavorited!!.favorited
+                        Log.v("AdapterRecyclerView", "FAVORITED BEFORE: " + favoritedBefore)
+
+                        var origin = destinationInformationFavorited!!.origin
+                        var destination = destinationInformationFavorited!!.destination
+                        var dateGo = destinationInformationFavorited!!.dateGo
+                        var dateBack = destinationInformationFavorited!!.dateBack
+
+                        if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
+                            if(favoritedBefore == "1"){
+                                button_favorite.setImageResource(R.drawable.ic_favorite)
+                            }else{
+                                button_favorite.setImageResource(R.drawable.ic_favorite_none)
+                            }
+                        }
+
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                    // ...
+                }
+            }
+
+            myRef.addListenerForSingleValueEvent(destinationListenerFavorited)
+
+            button_favorite.setOnClickListener(View.OnClickListener {
                 val destinationListener = object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
                         for (ds in dataSnapshot.children) {
@@ -82,7 +113,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                             var dateGo = destinationInformation!!.dateGo
                             var dateBack = destinationInformation!!.dateBack
 
-
                             if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
                                 Log.v("AdapterRecyclerView", "DESTINATION FOUND")
                                 val key: String? = ds.key
@@ -91,12 +121,10 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                                 if(favorited.equals("0")){
                                     if (key != null) {
                                         myRef.child(key).child("favorited").setValue("1")
-                                        button_favorite.setImageResource(R.drawable.ic_favorite)
                                     }
                                 }else{
                                     if(key != null) {
                                         myRef.child(key).child("favorited").setValue("0")
-                                        button_favorite.setImageResource(R.drawable.ic_favorite_none)
                                     }
                                 }
                             }else{
