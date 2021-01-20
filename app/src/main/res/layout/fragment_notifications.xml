@@ -46,12 +46,6 @@
                     android:text="Enable notification of favorited destinations"
                     android:layout_weight="1"/>
                 <RadioButton
-                    android:id="@+id/enable_marked_radio_button_notifications"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="Enable notification only of marked(with the bell) destinations"
-                    android:layout_weight="1"/>
-                <RadioButton
                     android:id="@+id/disable_notifications_radio_button_notifications"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

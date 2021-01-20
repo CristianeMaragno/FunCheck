@@ -51,7 +51,6 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
         val date_back = itemView.text_date_back_home
 
         val button_favorite = itemView.favorite_button_home
-        val button_notifications = itemView.notifications_button_home
 
         fun bind(destinationsHome: DestinationsInformation){
             var auth= FirebaseAuth.getInstance()
@@ -116,15 +115,12 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 myRef.addListenerForSingleValueEvent(destinationListener)
             })
 
-            button_notifications.setOnClickListener(View.OnClickListener {
-                button_notifications.setImageResource(R.drawable.ic_notifications_colored)
-            })
 
             itemView.setOnClickListener { view ->
                 val item_text = destination.text
                 val date_go_text = date_go.text
                 val date_back_text = date_back.text
-                //val position = itemView.verticalScrollbarPosition //Doesn't work, just 0
+
                 Log.v("AdapterRecyclerView", "item clicked")
 
                 val intent = Intent(view.getContext(), DestinationActivity::class.java)

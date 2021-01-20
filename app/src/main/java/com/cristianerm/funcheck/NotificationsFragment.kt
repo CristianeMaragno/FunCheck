@@ -48,10 +48,8 @@ class NotificationsFragment : Fragment() {
             notificationStatus = "0"
         }else if(radioButtonId == "enable_favorite_radio_button_notifications"){
             notificationStatus = "1"
-        }else if(radioButtonId == "enable_marked_radio_button_notifications"){
-            notificationStatus = "2"
         }else if(radioButtonId == "disable_notifications_radio_button_notifications"){
-            notificationStatus = "3"
+            notificationStatus = "2"
         }
 
         val firebaseUser = this.auth.currentUser!!

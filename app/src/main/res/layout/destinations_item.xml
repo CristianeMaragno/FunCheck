@@ -104,13 +104,6 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_favorite_none"
                 android:backgroundTint="@color/white"/>
-
-            <androidx.appcompat.widget.AppCompatImageButton
-                android:id="@+id/notifications_button_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_notifications_none"
-                android:backgroundTint="@color/white"/>
         </LinearLayout>
 
     </LinearLayout>
