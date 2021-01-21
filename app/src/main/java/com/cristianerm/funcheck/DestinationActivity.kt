@@ -16,15 +16,21 @@ class DestinationActivity : AppCompatActivity() {
     private lateinit var destinationResultsRecyclerViewAdapter: DestinationResultsRecyclerViewAdapter
     private val list = ArrayList<DestinationResultInformation>()
     private var loader: AsyncTask<Void, Void, ArrayList<DestinationResultInformation>>? = null
+    private var origin = ""
+    private var destination = ""
+    private var date_go = ""
+    private var date_back = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_destination)
 
-        val destination = intent.getStringExtra("destination")
-        val date_go = intent.getStringExtra("date go")
-        val date_back = intent.getStringExtra("date back")
+        origin = intent.getStringExtra("origin")
+        destination = intent.getStringExtra("destination")
+        date_go = intent.getStringExtra("date go")
+        date_back = intent.getStringExtra("date back")
 
+        text_destination_origin.setText(origin)
         text_destination_destination.setText(destination)
         text_date_go_destination.setText(date_go)
         text_date_back_destination.setText(date_back)
@@ -63,7 +69,7 @@ class DestinationActivity : AppCompatActivity() {
 
                     list.add(
                         DestinationResultInformation(
-                            attraction_name
+                            attraction_name, origin, destination, date_go, date_back
                         )
                     )
                 }
@@ -80,8 +86,6 @@ class DestinationActivity : AppCompatActivity() {
     }
 
     private fun getUrl(): String? {
-        val destination = intent.getStringExtra("destination")
-
         val numbersMap = mapOf("Paris, France" to "https://www.tripadvisor.com.br/Attractions-g187147-Activities-Paris_Ile_de_France.html",
             "New York, USA" to "https://www.tripadvisor.com.br/Attractions-g60763-Activities-New_York_City_New_York.html",
             "Rome, Italy" to "https://www.tripadvisor.com.br/Attractions-g187791-Activities-Rome_Lazio.html",

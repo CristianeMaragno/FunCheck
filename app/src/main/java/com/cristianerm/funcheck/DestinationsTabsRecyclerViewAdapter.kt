@@ -145,14 +145,16 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
 
 
             itemView.setOnClickListener { view ->
-                val item_text = destination.text
+                val origin_text = origin.text
+                val destination_text = destination.text
                 val date_go_text = date_go.text
                 val date_back_text = date_back.text
 
                 Log.v("AdapterRecyclerView", "item clicked")
 
                 val intent = Intent(view.getContext(), DestinationActivity::class.java)
-                intent.putExtra("destination", item_text)
+                intent.putExtra("origin", origin_text)
+                intent.putExtra("destination", destination_text)
                 intent.putExtra("date go", date_go_text)
                 intent.putExtra("date back", date_back_text)
                 view.getContext().startActivity(intent)

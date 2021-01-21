@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_destination.*
+import kotlinx.android.synthetic.main.activity_destination.view.*
 import kotlinx.android.synthetic.main.destination_item.view.*
 
 class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -54,7 +56,14 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
             val uid = firebaseUser.uid
             var myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
 
+            val origin = destinationResult.origin
+            val destination = destinationResult.destination
+            val dateGo = destinationResult.dateGo
+            val dateBack = destinationResult.dateBack
+
             attraction_name.setText(destinationResult.attraction_name)
+
+            
 
             attraction_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
                 var attractionSelected = attraction_name.text.toString()
