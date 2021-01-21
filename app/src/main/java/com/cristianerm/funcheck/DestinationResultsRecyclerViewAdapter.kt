@@ -1,9 +1,12 @@
 package com.cristianerm.funcheck
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.destination_item.view.*
 
@@ -44,8 +47,24 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
         val attraction_name = itemView.text_view_destination_item
 
         fun bind(destinationResult: DestinationResultInformation){
+            var auth= FirebaseAuth.getInstance()
+            var firebaseDatabase= FirebaseDatabase.getInstance()
+            var firebaseUser = auth.currentUser!!
+
+            val uid = firebaseUser.uid
+            var myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
 
             attraction_name.setText(destinationResult.attraction_name)
+
+            attraction_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
+                var attractionSelected = attraction_name.text.toString()
+                if(isChecked){
+                    //myRef.child(attractionId).child("attraction").setValue(attractionSelected)
+                    Log.v("ResultsRecyclerView", attractionSelected + " was selected")
+                }else{
+                    Log.v("ResultsRecyclerView", attractionSelected + " was deselected")
+                }
+            }
 
         }
 

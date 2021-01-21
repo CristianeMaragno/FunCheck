@@ -114,7 +114,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                             var dateBack = destinationInformation!!.dateBack
 
                             if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
-                                Log.v("AdapterRecyclerView", "DESTINATION FOUND")
+
                                 val key: String? = ds.key
                                 var favorited = destinationInformation!!.favorited
                                 Log.v("AdapterRecyclerView", "FAVORITED: " + favorited)
