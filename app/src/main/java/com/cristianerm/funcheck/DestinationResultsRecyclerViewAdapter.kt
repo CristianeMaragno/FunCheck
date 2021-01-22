@@ -1,12 +1,17 @@
 package com.cristianerm.funcheck
 
+import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_destination.*
 import kotlinx.android.synthetic.main.activity_destination.view.*
@@ -56,23 +61,82 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
             val uid = firebaseUser.uid
             var myRef = firebaseDatabase.getReference().child(uid).child("Destinations")
 
-            val origin = destinationResult.origin
-            val destination = destinationResult.destination
-            val dateGo = destinationResult.dateGo
-            val dateBack = destinationResult.dateBack
+            val originSelected = destinationResult.origin
+            val destinationSelected = destinationResult.destination
+            val dateGoSelected = destinationResult.dateGo
+            val dateBackSelected = destinationResult.dateBack
 
             attraction_name.setText(destinationResult.attraction_name)
 
-            
-
             attraction_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
-                var attractionSelected = attraction_name.text.toString()
-                if(isChecked){
-                    //myRef.child(attractionId).child("attraction").setValue(attractionSelected)
-                    Log.v("ResultsRecyclerView", attractionSelected + " was selected")
-                }else{
-                    Log.v("ResultsRecyclerView", attractionSelected + " was deselected")
+                val destinationListener = object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (ds in dataSnapshot.children) {
+                            val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                            var origin = destinationInformation!!.origin
+                            var destination = destinationInformation!!.destination
+                            var dateGo = destinationInformation!!.dateGo
+                            var dateBack = destinationInformation!!.dateBack
+
+                            if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected){
+                                val key: String? = ds.key
+                                var attractionSelected = attraction_name.text.toString()
+
+                                if (key != null){
+                                    var myRefAttraction = firebaseDatabase.getReference().child(uid).child("Destinations").child(key).child("attraction")
+
+                                    val attractionListener = object : ValueEventListener {
+                                        override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                            var deleteAttraction = false
+                                            for (dsAttraction in dataSnapshot.children) {
+                                                val attractionInformation = dsAttraction.getValue(AttractionInformation::class.java)
+
+                                                var attraction_database = attractionInformation!!.attraction
+                                                if(attraction_database == attractionSelected){
+                                                    val keyOldAttraction: String? = dsAttraction.key
+                                                    if (keyOldAttraction != null){
+                                                        Log.v(TAG, "DELETE ATTRACTION: " + keyOldAttraction)
+                                                        val refDeleteAttraction = myRefAttraction.child(keyOldAttraction)
+                                                        refDeleteAttraction.removeValue()
+                                                        deleteAttraction = true
+                                                    }
+                                                }
+                                            }
+
+                                            if (deleteAttraction == false){
+                                                Log.v(TAG, "CREATE ATTRACTION")
+                                                val keyNewAttraction = myRefAttraction.push().key
+                                                if (keyNewAttraction != null){
+                                                    myRefAttraction.child(keyNewAttraction).child("attraction").setValue(attractionSelected)
+                                                }
+                                            }
+                                        }
+
+                                        override fun onCancelled(databaseError: DatabaseError) {
+                                            // Getting Post failed, log a message
+                                            Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                                            // ...
+                                        }
+                                    }
+
+                                    myRefAttraction.addListenerForSingleValueEvent(attractionListener)
+                                }
+
+                            }else{
+
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Getting Post failed, log a message
+                        Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                        // ...
+                    }
                 }
+
+                myRef.addListenerForSingleValueEvent(destinationListener)
             }
 
         }
