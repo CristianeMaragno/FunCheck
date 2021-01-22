@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.destinations_item.view.*
+import java.lang.Exception
 
 class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -158,6 +160,58 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                 intent.putExtra("date go", date_go_text)
                 intent.putExtra("date back", date_back_text)
                 view.getContext().startActivity(intent)
+            }
+
+            itemView.setOnLongClickListener{
+                MaterialAlertDialogBuilder(itemView.context)
+                    .setTitle("Confirmation")
+                    .setMessage("Are you sure you wanr to delete this destination?")
+                    .setNegativeButton("Cancel") { dialog, which ->
+                        // Respond to negative button press
+                    }
+                    .setPositiveButton("Yes") { dialog, which ->
+                        Log.v(ContentValues.TAG, "DELETE DESTINATION")
+                        var originSelected = origin.text.toString()
+                        var destinationSelected = destination.text.toString()
+                        var dateGoSelected = date_go.text.toString()
+                        var dateBackSelected = date_back.text.toString()
+
+                        val destinationListener = object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                for (ds in dataSnapshot.children) {
+                                    val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                                    var origin = destinationInformation!!.origin
+                                    var destination = destinationInformation!!.destination
+                                    var dateGo = destinationInformation!!.dateGo
+                                    var dateBack = destinationInformation!!.dateBack
+
+                                    if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected) {
+                                        val key: String? = ds.key
+
+                                        if (key != null){
+                                            val refDeleteDestination = myRef.child(key)
+                                            refDeleteDestination.removeValue()
+                                        }
+                                    } else {
+
+                                    }
+                                }
+                            }
+
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                // Getting Post failed, log a message
+                                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                                // ...
+                            }
+
+                        }
+
+                        myRef.addListenerForSingleValueEvent(destinationListener)
+                    }
+                    .show()
+
+                return@setOnLongClickListener true
             }
 
         }

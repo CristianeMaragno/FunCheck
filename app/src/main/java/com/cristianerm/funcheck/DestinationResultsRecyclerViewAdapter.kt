@@ -93,6 +93,9 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
                                                 dsAttraction.getValue(AttractionInformation::class.java)
 
                                             var attraction_database = attractionInformation!!.attraction
+                                            Log.v(TAG, "ATTRACTION DATABASE: " + attraction_database)
+                                            Log.v(TAG, "ATTRACTION SELECTED: " + attractionSelected)
+
                                             if (attraction_database == attractionSelected) {
                                                 attraction_check_box.setOnCheckedChangeListener(null)
                                                 attraction_check_box.isChecked = true
