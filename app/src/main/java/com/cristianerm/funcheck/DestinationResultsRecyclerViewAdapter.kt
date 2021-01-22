@@ -68,6 +68,69 @@ class DestinationResultsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.
 
             attraction_name.setText(destinationResult.attraction_name)
 
+            val destinationListener = object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    for (ds in dataSnapshot.children) {
+                        val destinationInformation = ds.getValue(DestinationInformation::class.java)
+
+                        var origin = destinationInformation!!.origin
+                        var destination = destinationInformation!!.destination
+                        var dateGo = destinationInformation!!.dateGo
+                        var dateBack = destinationInformation!!.dateBack
+
+                        if (origin == originSelected && destination == destinationSelected && dateGo == dateGoSelected && dateBack == dateBackSelected) {
+                            val key: String? = ds.key
+                            var attractionSelected = attraction_name.text.toString()
+
+                            if (key != null) {
+                                var myRefAttractionChecked = firebaseDatabase.getReference().child(uid).child("Destinations")
+                                        .child(key).child("attraction")
+
+                                val attractionCheckedListener = object : ValueEventListener {
+                                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                        for (dsAttraction in dataSnapshot.children) {
+                                            val attractionInformation =
+                                                dsAttraction.getValue(AttractionInformation::class.java)
+
+                                            var attraction_database = attractionInformation!!.attraction
+                                            if (attraction_database == attractionSelected) {
+                                                attraction_check_box.setOnCheckedChangeListener(null)
+                                                attraction_check_box.isChecked = true
+                                            }
+                                        }
+
+                                    }
+
+                                    override fun onCancelled(databaseError: DatabaseError) {
+                                        // Getting Post failed, log a message
+                                        Log.w(
+                                            ContentValues.TAG,
+                                            "loadPost:onCancelled",
+                                            databaseError.toException()
+                                        )
+                                        // ...
+                                    }
+                                }
+
+                                myRefAttractionChecked.addListenerForSingleValueEvent(attractionCheckedListener)
+                            }
+
+                        } else {
+
+                        }
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Getting Post failed, log a message
+                    Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+                    // ...
+                }
+
+            }
+
+            myRef.addListenerForSingleValueEvent(destinationListener)
+
             attraction_check_box.setOnCheckedChangeListener { buttonView, isChecked ->
                 val destinationListener = object : ValueEventListener {
                     override fun onDataChange(dataSnapshot: DataSnapshot) {
