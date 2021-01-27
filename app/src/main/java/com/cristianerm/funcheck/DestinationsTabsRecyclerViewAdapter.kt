@@ -175,8 +175,11 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                         var destinationSelected = destination.text.toString()
                         var dateGoSelected = date_go.text.toString()
                         var dateBackSelected = date_back.text.toString()
+                        
+                        val databaseDestinationKey = DatabaseDestinationKey.getKey("TEST")
+                        Log.v("AdapterRecyclerView", databaseDestinationKey)
 
-                        val destinationListener = object : ValueEventListener {
+                        /*val destinationListener = object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
                                 for (ds in dataSnapshot.children) {
                                     val destinationInformation = ds.getValue(DestinationInformation::class.java)
@@ -207,7 +210,7 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
 
                         }
 
-                        myRef.addListenerForSingleValueEvent(destinationListener)
+                        myRef.addListenerForSingleValueEvent(destinationListener)*/
                     }
                     .show()
 
