@@ -176,8 +176,8 @@ class DestinationsTabsRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.Vi
                         var dateGoSelected = date_go.text.toString()
                         var dateBackSelected = date_back.text.toString()
                         
-                        val databaseDestinationKey = DatabaseDestinationKey.getKey("TEST")
-                        Log.v("AdapterRecyclerView", databaseDestinationKey)
+                        val databaseDestinationKey = DatabaseDestinationKey.getDatabaseResult(originSelected, destinationSelected, dateGoSelected, dateBackSelected)
+                        Log.v("AdapterRecyclerView", "RESULT: " + databaseDestinationKey)
 
                         /*val destinationListener = object : ValueEventListener {
                             override fun onDataChange(dataSnapshot: DataSnapshot) {
